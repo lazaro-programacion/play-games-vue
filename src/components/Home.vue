@@ -5,10 +5,12 @@
     <ul>
       <li><router-link to="/usuarios">Lista de usuarios</router-link></li>
     </ul>
+
   </div>
 </template>
 
 <script>
+
 export default {
   name: 'Home',
   props: {

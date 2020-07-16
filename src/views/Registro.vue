@@ -1,15 +1,16 @@
 <template>
-  <b-container fluid>
+  <b-container xl>
   <b-row class="row  ">
   <b-col md="8"	 class="mi-fondo-imagen">
-  <img src="https://www.r-cade.fr/wp-content/uploads/2016/02/GaMMIng-Fest.jpg" alt="gamming familiar">
+  <!--<img src="https://www.r-cade.fr/wp-content/uploads/2016/02/GaMMIng-Fest.jpg" alt="gamming familiar"> -->
+  <div class="tamnio"></div>
   </b-col>
-  <b-col  md="4" class="pt-5">
+  <b-col  md="4" class="pt-5 form">
    <h1 class="mb-5">
    <strong>   Registro de Usuarios</strong>
    </h1>
    
-    <form @submit.prevent="enviarForm(user)">
+    <form @submit.prevent="crearUsuario(user)">
       <div role="group">
         <b-form-input
           id="input-live"
@@ -70,10 +71,13 @@
     </form>
     </b-col>
    </b-row>
+   <p v-if="error">Datos incorrectos</p>
   </b-container>
+
 </template>
 
 <script>
+import {mapActions, mapState } from 'vuex';
 export default {
   name: "Registro",
   data() {
@@ -87,6 +91,8 @@ export default {
       pass2: "",
     };
   },
+  created() {
+  },
   updated() {
     console.log("validar", this.validar());
   },
@@ -96,9 +102,7 @@ export default {
         this.nameState && this.emailState && this.pass1State && this.pass2State
       );
     },
-    enviarForm() {
-      console.log("Lo has enviado correctamente",this.user);
-    }
+    ...mapActions(['crearUsuario'])
   },
   computed: {
     nameState() {
@@ -112,15 +116,20 @@ export default {
     },
     pass2State() {
       return this.user.pass1 === this.pass2 && this.user.pass1 !== "" ? true : false;
-    }
+    },
+    ...mapState(['error'])
   }
 };
 </script>
 
 <style scoped>
-/* .mi-fondo-imagen{
-    background-color: rgb(52,52,50);
-} */
+.row{
+  background-color: rgb(52,52,50);
+}
+.form{
+  background-color: gainsboro;
+
+}
 input {
   text-align: center;
   width: 88%;
@@ -129,5 +138,14 @@ input {
 img{
  width: 80%;
  height: 77%;
+}
+.mi-fondo-imagen{
+    background-image: url(https://www.r-cade.fr/wp-content/uploads/2016/02/GaMMIng-Fest.jpg);
+    background-repeat: no-repeat;
+    background-size: 50%;
+    background-position: center;
+}
+.tamnio{
+    height: 100%;
 }
 </style>

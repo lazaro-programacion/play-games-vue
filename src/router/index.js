@@ -35,7 +35,16 @@ const routes = [
     name: 'Memoria',
     component: () => import('../views/GameMemoria.vue')
   },
-
+  {
+    path: '/usuarios',
+    name: 'Usuarios',
+    component: () => import('../views/UserList.vue')
+  },
+  {
+    path: '/usuario/:id',
+    name: 'Usuario',
+    component: () => import('../views/Usuario.vue')
+  },
 
 ]
 

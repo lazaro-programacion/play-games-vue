@@ -8,7 +8,7 @@ Vue.use(VueRouter)
   {
     path: '/registro',
     name: 'Registrto',
-    component: () => import(/* webpackChunkName: "registro" */ '../views/Registro.vue')
+    component: () => import('../views/Registro.vue')
   }
 ]
 

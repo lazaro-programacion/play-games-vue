@@ -1,3 +1,5 @@
 # play-vue
 
-- npm i -s firebase
+- npm i firebase
+
+- npm install bootstrap-vue

@@ -1,3 +1,3 @@
 # play-vue
 
-- npm i firebase
+- npm i -s firebase

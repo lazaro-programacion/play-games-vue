@@ -1,10 +1,10 @@
 <template>
-  <div class="container-fluid " >
-  <div class="row">
-  <div class="md-col-8 sm-col-10 mi-fondo-imagen">
+  <b-container fluid>
+  <b-row class="row  ">
+  <b-col md="8"	 class="mi-fondo-imagen">
   <img src="https://www.r-cade.fr/wp-content/uploads/2016/02/GaMMIng-Fest.jpg" alt="gamming familiar">
-  </div>
-  <div class="md-col-4 sm-col-10 pt-5">
+  </b-col>
+  <b-col  md="4" class="pt-5">
    <h1 class="mb-5">
    <strong>   Registro de Usuarios</strong>
    </h1>
@@ -68,9 +68,9 @@
       <hr>
       <button class="btn btn-primary" :disabled="!validar()">Registrar usuario</button>
     </form>
-    </div>
-   </div>
-  </div>
+    </b-col>
+   </b-row>
+  </b-container>
 </template>
 
 <script>
@@ -118,9 +118,9 @@ export default {
 </script>
 
 <style scoped>
-.mi-fondo-imagen{
+/* .mi-fondo-imagen{
     background-color: rgb(52,52,50);
-}
+} */
 input {
   text-align: center;
   width: 88%;

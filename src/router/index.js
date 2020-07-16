@@ -3,13 +3,40 @@ import VueRouter from 'vue-router'
 
 Vue.use(VueRouter)
 
-  const routes = [
+const routes = [
 
   {
+    path: '/',
+    name: 'Home',
+    component: () => import('../components/Home.vue')
+  },
+  {
     path: '/registro',
-    name: 'Registrto',
-    component: () => import(/* webpackChunkName: "registro" */ '../views/Registro.vue')
-  }
+    name: 'Registro',
+    component: () => import('../views/Registro.vue')
+  },
+  {
+    path: '/juegos',
+    name: 'Juegos',
+    component: () => import('../views/GameList.vue')
+  },
+  {
+    path: '/juego-palabras',
+    name: 'Juego-Palabras',
+    component: () => import('../views/JuegoPalabras.vue')
+  },
+  {
+    path: '/ahorcado',
+    name: 'Ahorcado',
+    component: () => import('../views/GameAhorcado.vue')
+  },
+  {
+    path: '/memoria',
+    name: 'Memoria',
+    component: () => import('../views/GameMemoria.vue')
+  },
+
+
 ]
 
 const router = new VueRouter({

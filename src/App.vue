@@ -1,14 +1,24 @@
 <template>
   <div id="app">
-    <div id="nav">
+  <Navbar></Navbar>
+  <!--  <div id="nav">
       <router-link to="/">Home</router-link> |
+      <router-link to="/login">Login</router-link> |
       <router-link to="/registro">Registro</router-link> |
-      <router-link to="/juegos">Lista de Juegos</router-link> |
-      <router-link to="/usuarios">Lista de usuarios</router-link>
-    </div>
+      <router-link to="/juegos">Lista de Juegos</router-link>
+    </div> -->
     <router-view/>
   </div>
 </template>
+
+<script>
+import Navbar from './components/Navbar.vue';
+export default {
+  components:{
+    Navbar
+  }
+}
+</script>
 
 <style>
 #app {

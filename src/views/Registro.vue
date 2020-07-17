@@ -7,7 +7,7 @@
   </b-col>
   <b-col  md="4" class="pt-5 form">
    <h1 class="mb-5">
-   <strong>   Registro de Usuarios</strong>
+   <strong style="color: black">   Registro de Usuarios</strong>
    </h1>
    
     <form @submit.prevent="crearUsuario(user)">
@@ -67,7 +67,7 @@
         <b-form-invalid-feedback id="input-live-feedback">El campo no puede estar vacio</b-form-invalid-feedback>
       </div>
       <hr>
-      <button class="btn btn-primary" :disabled="!validar()">Registrar usuario</button>
+      <b-button type='submit' :disabled="!validar()">Registrar usuario</b-button>
     </form>
     </b-col>
    </b-row>
@@ -140,12 +140,13 @@ img{
  height: 77%;
 }
 .mi-fondo-imagen{
-    background-image: url(https://www.r-cade.fr/wp-content/uploads/2016/02/GaMMIng-Fest.jpg);
+    background-image: url(https://unmodestocomentario.files.wordpress.com/2017/07/space-invaders.gif);
     background-repeat: no-repeat;
-    background-size: 50%;
+    background-size: 100%;
     background-position: center;
 }
 .tamnio{
     height: 100%;
 }
+
 </style>

@@ -5,17 +5,21 @@
     <ul>
       <li><router-link to="/usuarios">Lista de usuarios</router-link></li>
     </ul>
-
+    <hr>
+    <p>{{usuario}}</p>
   </div>
 </template>
 
 <script>
-
+import {mapState} from 'vuex';
 export default {
   name: 'Home',
   props: {
     msg: String
-  }
+  },
+  computed: {
+    ...mapState(['usuario'])
+  },
 }
 </script>
 

@@ -1,29 +1,39 @@
 <template>
-  <div class="lista-usuarios">
+  <div class="lista-usuarios container">
     <h1>Lista de usuarios</h1>
-    <ul>
-      <li v-for="user in usuarios" :key="user.id">
-        {{user.displayName}}
-      </li>
-    </ul>
+    <table class="table table-hover">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Nombre:</th>
+      <th scope="col">Rol</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr v-for="(user, index) in usuarios" :key="index">
+      <th scope="row">{{user.id}}</th>
+      <td>{{user.displayName}}</td>
+      <td>{{user.rol}}</td>
+    </tr>
+  </tbody>
+</table>
   </div>
 </template>
 
 <script>
 export default {
-    data() {
-        return {
-        }
-    },
+  name: 'UserList',
     async created() {
       try {
         await this.$store.dispatch('getUsers');
       } catch (error) {
         console.error(error);
-      }    
+      }  
+  
     },
     computed: {
       usuarios(){
+        // eslint-disable-next-line vue/no-side-effects-in-computed-properties
         return this.$store.state.usuarios
       }
     },
@@ -31,4 +41,7 @@ export default {
 </script>
 
 <style>
+.container{
+  max-width: 40em;
+}
 </style>

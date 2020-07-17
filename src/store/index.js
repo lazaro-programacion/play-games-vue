@@ -9,6 +9,7 @@ export default new Vuex.Store({
   state: {
     usuario: null,
     error: null,
+    usuarios:[]
   },
 
   mutations: {
@@ -16,14 +17,32 @@ export default new Vuex.Store({
       state.usuario = payload;
       localStorage.setItem('usuario', JSON.stringify(state.usuario));
     },
-
-  
     setError(state, payload) {
       state.error = payload;
     },
-
+    setUsers(state, usuarios){
+      state.usuarios = usuarios;
+    }
   },
   actions: {
+    getUsers({commit}){
+      db.collection('usuarios').get().then(
+       res=> {
+         const docsUsers=res.docs.map(
+           item=>{
+             const data=item.data();
+             return{
+               id: item.id,
+               displayName: data.displayName,
+               rol: item.rol
+             }
+            }
+         )
+         console.log('Users',docsUsers);
+         commit('setUsers', docsUsers)
+       }
+      )
+    },
     
     crearUsuario({ commit }, usuario) {
       auth

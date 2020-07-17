@@ -1,25 +1,45 @@
 <template>
-  <div class="lista-usuarios">
+  <div class="lista-usuarios container">
     <h1>Lista de usuarios</h1>
-    <b-table striped hover :items="items"></b-table>
+    <table class="table table-hover">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Nombre:</th>
+      <th scope="col">Rol</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr v-for="(user, index) in usuarios" :key="index">
+      <th scope="row">{{user.id}}</th>
+      <td>{{user.displayName}}</td>
+      <td>{{user.rol}}</td>
+    </tr>
+  </tbody>
+</table>
   </div>
 </template>
 
 <script>
 export default {
-    data() {
-        return {
-            items: [
-          { first_name: 'Dickerson', last_name: 'Macdonald', score: 10000 },
-          { first_name: 'Larsen', last_name: 'Shaw', score: 9000 },
-          { first_name: 'Geneva', last_name: 'Wilson', score: 8000 },
-          { first_name: 'Jami', last_name: 'Carney', score: 7000 }
-        ]
-        }
+  name: 'UserList',
+    async created() {
+      try {
+        await this.$store.dispatch('getUsers');
+      } catch (error) {
+        console.error(error);
+      }  
     },
-
+    computed: {
+      usuarios(){
+        return this.$store.state.usuarios
+      }
+    },
 };
 </script>
 
 <style>
+.container{
+  max-width: 40em;
+}
 </style>

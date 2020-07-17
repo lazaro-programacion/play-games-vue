@@ -2,7 +2,11 @@ import { mapActions, mapState } from 'vuex';
 <template>
   <div class="lista-usuarios">
     <h1>Lista de usuarios</h1>
-    <b-table striped hover :items="items"></b-table>
+    <ul>
+      <li v-for="user in usuarios" :key="user.id">
+        {{user.displayName}}
+      </li>
+    </ul>
   </div>
 </template>
 
@@ -22,17 +26,30 @@ export default {
         ]*/
         }
     },
-    mounted() {
+        
+  
+ mounted() {
       this.getUsuarios()
       console.log('usuarios',this.listaUsuarios)
     },
-    methods: {
-      ...mapActions(['getUsuarios'])
-    },
-  computed: {
-    ...mapState(['listaUsuarios'])
-  },
-};
+   methods: {
+      ...mapActions(['getUsuarios']),
+
+    async created() {
+      try {
+        await this.$store.dispatch('getUsers');
+      } catch (error) {
+        console.error(error);
+      }    
+    }
+   },  
+    computed: {
+       ...mapState(['listaUsuarios']),
+      usuarios(){
+        return this.$store.state.usuarios    
+      }
+    }
+}
 </script>
 
 <style>

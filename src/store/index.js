@@ -9,7 +9,8 @@ export default new Vuex.Store({
   state: {
     usuario: null,
     error: null,
-    listaUsuarios: []
+    listaUsuarios: [],
+    usuarios:[]
   },
 
   mutations: {
@@ -26,8 +27,31 @@ export default new Vuex.Store({
       state.listaUsuarios = payload
     },
 
+    setUsers(state, usuarios){
+      state.usuarios = usuarios;
+    }
+
   },
   actions: {
+    getUsers({commit}){
+      db.collection('usuarios').get().then(
+       res=> {
+         const docsUsers=res.docs.map(
+           item=>{
+             const data=item.data();
+             return{
+               id: item.id,
+               displayName: data.displayName,
+               rol: item.rol
+             }
+            }
+         )
+         console.log('Users',docsUsers);
+         commit('setUsers', docsUsers)
+       }
+      )
+
+    },
     getUsuarios({commit}){
       const listUsers = []
       db.collection('usuarios').get()

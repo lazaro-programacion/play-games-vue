@@ -8,7 +8,8 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   state: {
     usuario: null,
-    error: null
+    error: null,
+    listaUsuarios: []
   },
   mutations: {
     setUsuario(state, payload){
@@ -16,9 +17,27 @@ export default new Vuex.Store({
     },
     setError(state, payload){
       state.error = payload
-    }
+    },
+    setlistaUsuarios(state, payload){
+      state.listaUsuarios = payload
+    },
   },
   actions: {
+    getUsuarios({commit}){
+      const listUsers = []
+      db.collection('usuarios').get()
+        .then(res =>{
+          console.log(res.docs)
+          res.forEach(doc => {
+            console.log(doc.id)
+            console.log(doc.data())
+            let user = doc.data()
+            user.id = doc.id
+            listUsers.push(user)
+           })
+         commit('setlistaUsuarios', listUsers)
+        })
+    },
     crearUsuario({commit}, usuario){
       auth.createUserWithEmailAndPassword(usuario.email, usuario.pass1)
       .then(

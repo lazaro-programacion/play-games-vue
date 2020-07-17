@@ -28,11 +28,6 @@ const routes = [
     meta: { requiresAuth: true}
   },
   {
-    path: '/usuarios',
-    name: 'Usuarios',
-    component: () => import('../components/UsersList.vue')
-  },
-  {
     path: '/juego-palabras',
     name: 'Juego-Palabras',
     component: () => import('../views/JuegoPalabras.vue')

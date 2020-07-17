@@ -29,11 +29,9 @@ export default {
       } catch (error) {
         console.error(error);
       }  
-  
     },
     computed: {
       usuarios(){
-        // eslint-disable-next-line vue/no-side-effects-in-computed-properties
         return this.$store.state.usuarios
       }
     },

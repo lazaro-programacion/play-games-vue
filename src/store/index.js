@@ -8,7 +8,8 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   state: {
     usuario: null,
-    error: null
+    error: null,
+    users: null
   },
   mutations: {
     setUsuario(state, payload){
@@ -16,6 +17,9 @@ export default new Vuex.Store({
     },
     setError(state, payload){
       state.error = payload
+    },
+    setUsers(state, payload){
+      state.users = payload
     }
   },
   actions: {
@@ -44,6 +48,14 @@ export default new Vuex.Store({
         commit('setError',error)
        console.log(error)
       });
+    },
+    getUsuarios({commit}){
+      db.collection('usuarios').get().then(
+        res=> {
+          console.log(res)
+          commit('setUsers', res);
+        }
+      )
     }
   },
   modules: {

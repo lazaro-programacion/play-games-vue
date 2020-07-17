@@ -1,9 +1,12 @@
 <template>
+<div>
   <h1>lista usuarios component</h1>
+
+</div>
 </template>
 
 <script>
-
+import {mapActions} from 'vuex';
 export default {
     name: 'UsersList',
   data() {
@@ -11,19 +14,15 @@ export default {
       users: [],
     };
   },
-  mounted() {},
+  created() {
+    
+  },
+  mounted() {
+      console.log('users',this.getUsers());
+  },
   methods: {
-    fetchUsers() {
-      this.users = this.$store
-        .collection("usuarios")
-        .then((result) => {
-          console.log("results", result);
-        })
-        .catch((err) => {
-          console.log("error", err);
-        });
-        console.log('users',users);
-    },
+      ...mapActions(['getUsers'])
+
   },
 };
 </script>

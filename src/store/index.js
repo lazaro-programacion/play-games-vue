@@ -30,12 +30,17 @@ export default new Vuex.Store({
       state.puntuacion = payload;
       localStorage.setItem("puntuacion", JSON.stringify(state.puntuacion));
     },
+
+
     setError(state, payload) {
       state.error = payload;
     },
+
     setUsers(state, usuarios){
       state.usuarios = usuarios;
     }
+ 
+
   },
   actions: {
     getUsers({commit}){

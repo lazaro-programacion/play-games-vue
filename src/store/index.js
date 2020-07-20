@@ -30,14 +30,6 @@ export default new Vuex.Store({
       state.puntuacion = payload;
       localStorage.setItem("puntuacion", JSON.stringify(state.puntuacion));
     },
-<<<<<<< HEAD
-
-    setError(state, payload) {
-      state.error = payload;
-    },
-  },
-  actions: {
-=======
     setError(state, payload) {
       state.error = payload;
     },
@@ -65,7 +57,6 @@ export default new Vuex.Store({
       )
     },
     
->>>>>>> 33dea6e06e1fedd813f761a4a4b37d7f6009b417
     crearUsuario({ commit }, usuario) {
       auth
         .createUserWithEmailAndPassword(usuario.email, usuario.pass1)

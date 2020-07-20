@@ -13,23 +13,34 @@
 
 <script>
 import Navbar from './components/Navbar.vue';
+import {mapActions} from 'vuex';
 export default {
   components:{
     Navbar
-  }
+  },
+  methods: {
+    ...mapActions(['rankingTop'])
+  },
+  created() {
+    this.rankingTop();
+  },
 }
 </script>
 
 <style>
+@font-face {
+  font-family: MyHelvetica;
+  src: url('./assets/space-invaders-regular.ttf');
+  font-weight: bold;
+}
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #ffffff;
-  background-color: dimgrey;
-  height: 100%;
-
+  background-color: rgb(0, 0, 0);
+     height: 903px;
 }
 
 #nav {

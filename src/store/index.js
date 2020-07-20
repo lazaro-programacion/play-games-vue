@@ -8,6 +8,12 @@ Vue.use(Vuex);
 export default new Vuex.Store({
   state: {
     usuario: null,
+    puntuacion: {
+      puntuacion: null,
+      nombre: null,
+      id: null,
+    },
+    rankin: [],
     error: null,
     usuarios:[]
   },
@@ -15,9 +21,17 @@ export default new Vuex.Store({
   mutations: {
     setUsuario(state, payload) {
       state.usuario = payload;
-      localStorage.setItem('usuario', JSON.stringify(state.usuario));
+      localStorage.setItem("usuario", JSON.stringify(state.usuario));
     },
-  
+    setRankin(state, payload) {
+      state.rankin = payload;
+    },
+    setPuntuacion(state, payload) {
+      state.puntuacion = payload;
+      localStorage.setItem("puntuacion", JSON.stringify(state.puntuacion));
+    },
+
+
     setError(state, payload) {
       state.error = payload;
     },
@@ -25,6 +39,7 @@ export default new Vuex.Store({
     setUsers(state, usuarios){
       state.usuarios = usuarios;
     }
+ 
 
   },
   actions: {
@@ -46,6 +61,7 @@ export default new Vuex.Store({
        }
       )
     },
+    
     crearUsuario({ commit }, usuario) {
       auth
         .createUserWithEmailAndPassword(usuario.email, usuario.pass1)
@@ -54,13 +70,18 @@ export default new Vuex.Store({
             displayName: usuario.nombre,
             email: res.user.email,
             uid: res.user.uid,
-        //    pass1: usuario.pass1,
             rol: usuario.rol,
+          };
+          const puntua = {
+            puntuacion: null,
+            nombre: usuario.nombre,
+            email: res.user.email,
+            data: new Date(),
           };
 
           db.collection("usuarios")
             .add(usuarioCreado)
-            .then(console.log("subido correctamente"));
+            .then(console.log("creado correctamente"));
 
           db.collection("usuarios")
             .get()
@@ -72,15 +93,19 @@ export default new Vuex.Store({
                   usuarioBuscado = doc.data();
                   usuarioBuscado.id = doc.id;
                   commit("setUsuario", usuarioBuscado);
-                  router.push("/");
                 }
               });
             });
+          db.collection("puntMemori")
+            .doc(res.user.email)
+            .set(puntua)
+            .then(console.log("puntMemori correctamente"));
         })
         .catch(function(error) {
           commit("setError", error);
           console.log(error);
         });
+      router.push("/");
     },
     ingresoUsuario({ commit }, usuario) {
       auth
@@ -115,14 +140,48 @@ export default new Vuex.Store({
     cerrarSesion() {
       auth.signOut().then((res) => {
         router.push("/login");
-        localStorage.removeItem('usuario') //limia el localstore usuario
+        localStorage.removeItem("usuario");
+        localStorage.removeItem("puntuacion"); //limia el localstore usuario
 
-    //  localStorage.clear() // esto lo borra todo
+        //  localStorage.clear() // esto lo borra todo
         console.log("cerrarSesion", res);
       });
     },
     detectarUsuario({ commit }, usuario) {
+      usuario = JSON.parse(localStorage.getItem("usuario"));
       commit("setUsuario", usuario);
+    },
+    detectarPuntacion({ commit }, puntuacion) {
+      commit("setPuntuacion", puntuacion);
+    },
+    puntPuntuacion({ commit }) {
+      const user = JSON.parse(localStorage.getItem("usuario"));
+      db.collection("puntMemori")
+        .doc(user.email)
+        .get()
+        .then((res) => {
+          console.log("si existe", res.data().puntuacion);
+
+          const punt = res.data();
+          commit("setPuntuacion", punt);
+        })
+        .catch(function(error) {
+          commit("setError", error);
+          console.log("no entra", error);
+        });
+    },
+    rankingTop({commit}) {
+      let ref = db.collection('puntMemori').orderBy('puntuacion', 'asc').limit(10)
+      ref.onSnapshot(querySnapshot =>{
+        this.rankin = []
+
+          querySnapshot.forEach(doc => {
+            this.rankin.push(doc.data())
+          })
+          commit("setRankin", this.rankin),
+
+        console.log('todo correcto',this.rankin)
+      })
     },
   },
   modules: {},

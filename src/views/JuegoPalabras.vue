@@ -1,6 +1,21 @@
 <template>
-  <div class="container">
-    <h1>Palabras encadenadas</h1>
+  <div class="container mt-2">
+    <b-card
+    overlay
+    img-src="https://lh3.googleusercontent.com/wyObs46fr74K4EfEla_4SfJve42Lxm_rzVn5bjY-IGA3H5ux5AfquXqVIXIA-_gnteI"
+    img-alt="Card Image"
+    text-variant="white"
+    title="seras capaz de conseguir el record ??"
+    footer-tag="Palabras encadenadas" 
+    >
+  <b-row >
+    <b-col>Exprime tu cerebro</b-col>
+    <b-col></b-col>
+    <b-col></b-col>
+  </b-row>
+   
+  </b-card>
+    
     <b-button id="show-btn" class='m-5' @click="$bvModal.show('bv-modal-example')">Ver instrucciones</b-button>
 
       <b-modal id="bv-modal-example" hide-footer>
@@ -33,7 +48,7 @@
 <script>
 import ListaPalabras from "../components/juego-palabras/ListaPalabras";
 import AddPalabra from "../components/juego-palabras/AddPalabra";
-
+// https://lh3.googleusercontent.com/wyObs46fr74K4EfEla_4SfJve42Lxm_rzVn5bjY-IGA3H5ux5AfquXqVIXIA-_gnteI
 export default {
   name:'JuegoPalabras',
   components: {

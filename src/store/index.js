@@ -9,7 +9,6 @@ export default new Vuex.Store({
   state: {
     usuario: null,
     error: null,
-    listaUsuarios: [],
     usuarios:[]
   },
 
@@ -21,10 +20,6 @@ export default new Vuex.Store({
   
     setError(state, payload) {
       state.error = payload;
-    },
-
-    setlistaUsuarios(state, payload){
-      state.listaUsuarios = payload
     },
 
     setUsers(state, usuarios){
@@ -50,24 +45,7 @@ export default new Vuex.Store({
          commit('setUsers', docsUsers)
        }
       )
-
     },
-    getUsuarios({commit}){
-      const listUsers = []
-      db.collection('usuarios').get()
-        .then(res =>{
-          console.log(res.docs)
-          res.forEach(doc => {
-            console.log(doc.id)
-            console.log(doc.data())
-            let user = doc.data()
-            user.id = doc.id
-            listUsers.push(user)
-           })
-         commit('setlistaUsuarios', listUsers)
-        })
-    },
-    
     crearUsuario({ commit }, usuario) {
       auth
         .createUserWithEmailAndPassword(usuario.email, usuario.pass1)

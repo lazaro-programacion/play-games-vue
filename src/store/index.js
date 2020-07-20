@@ -15,6 +15,7 @@ export default new Vuex.Store({
     },
     rankin: [],
     error: null,
+    usuarios:[]
   },
 
   mutations: {
@@ -29,12 +30,42 @@ export default new Vuex.Store({
       state.puntuacion = payload;
       localStorage.setItem("puntuacion", JSON.stringify(state.puntuacion));
     },
+<<<<<<< HEAD
 
     setError(state, payload) {
       state.error = payload;
     },
   },
   actions: {
+=======
+    setError(state, payload) {
+      state.error = payload;
+    },
+    setUsers(state, usuarios){
+      state.usuarios = usuarios;
+    }
+  },
+  actions: {
+    getUsers({commit}){
+      db.collection('usuarios').get().then(
+       res=> {
+         const docsUsers=res.docs.map(
+           item=>{
+             const data=item.data();
+             return{
+               id: item.id,
+               displayName: data.displayName,
+               rol: item.rol
+             }
+            }
+         )
+         console.log('Users',docsUsers);
+         commit('setUsers', docsUsers)
+       }
+      )
+    },
+    
+>>>>>>> 33dea6e06e1fedd813f761a4a4b37d7f6009b417
     crearUsuario({ commit }, usuario) {
       auth
         .createUserWithEmailAndPassword(usuario.email, usuario.pass1)

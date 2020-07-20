@@ -125,6 +125,8 @@ export default {
 <style scoped>
 .row{
   background-color: rgb(52,52,50);
+    font-family: "Press Start 2P", cursive;
+
 }
 .form{
   background-color: gainsboro;

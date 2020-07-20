@@ -6,7 +6,7 @@
       </b-col>
       <b-col md="4" class="pt-5 form">
         <h1 class="mb-5">
-          <strong style="color: black">Inicia Sesion</strong>
+          <strong class="ini-ses" style="color: black; ">Inicia Sesion</strong>
         </h1>
 
         <form @submit.prevent="ingresoUsuario(user)">
@@ -104,6 +104,8 @@ export default {
 .row {
   background-color: rgb(52, 52, 50);
   height: 606.8px;
+    font-family: "Press Start 2P", cursive;
+
 }
 .form {
   background-color: gainsboro;
@@ -126,4 +128,5 @@ img {
 .tamnio {
   height: 100%;
 }
+
 </style>

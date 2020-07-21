@@ -1,8 +1,8 @@
 <template>
   <div class="lista-usuarios container">
     <h1>Lista de usuarios</h1>
-    <table class="table table-hover">
-  <thead>
+    <table class="table table-hover table-dark">
+  <thead class="thead-light">
     <tr>
       <th scope="col">#</th>
       <th scope="col">Nombre:</th>
@@ -38,7 +38,7 @@ export default {
 };
 </script>
 
-<style>
+<style scopped> 
 .container{
   max-width: 40em;
 }

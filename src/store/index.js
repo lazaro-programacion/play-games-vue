@@ -36,6 +36,8 @@ export default new Vuex.Store({
     setUsers(state, usuarios){
       state.usuarios = usuarios;
     }
+ 
+
   },
   actions: {
     getUsers({commit}){

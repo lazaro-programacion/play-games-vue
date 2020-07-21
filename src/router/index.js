@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import {auth} from '../firebase'
+import ruta404  from '../views/ruta404.vue'
 
 Vue.use(VueRouter)
 
@@ -52,6 +53,7 @@ const routes = [
     name: 'Usuario',
     component: () => import('../views/Usuario.vue')
   },
+  {path: '*', name:'ruta404', component: ruta404}
 
 ]
 

@@ -38,7 +38,7 @@ export default {
 };
 </script>
 
-<style scopped> 
+<style scoped>
 .container{
   max-width: 40em;
 }

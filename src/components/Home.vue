@@ -56,13 +56,13 @@
       <h3 class="text-center">HIGH SCORE</h3>
       <div style="display:flex" >
         <ol  class="text-center" style="color:rgb(163, 81, 0); padding: 10px;">
-          NAME:
+          NAME: <hr>
           <li v-for="(item, index) in rankin" :key="index" style="padding: 10px;">
           {{item.nombre.toUpperCase()}} 
           </li>
         </ol>
         <ol class="text-center" style="color:rgb(163, 81, 0); padding: 10px;">
-          SCORE:
+          SCORE: <hr>
           <li v-for="(item, index) in rankin" :key="index" style="padding: 10px;">
             {{item.puntuacion}}
             <span v-if=" puntuacion.puntuacion">POINTS</span>
@@ -266,9 +266,10 @@ a {
 
 .h-score {
   text-align: left;
-  position: fixed;
+  position: initial;
   float: right;
-  margin-left: 80%;
+  margin-left: 0%;
+  margin-right: 75%;
   margin-top: -10px;
   font-family: "Press Start 2P", cursive;
 

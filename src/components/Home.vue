@@ -14,7 +14,7 @@
         >
           <b-card-text>Palabras encadenadas. Pon a prueba tu cerebro.</b-card-text>
 
-          <b-button href="/juego-palabras" variant="primary">PLAY NOW</b-button>
+          <b-button variant="primary"><router-link to="/juego-palabras">PLAY NOW</router-link></b-button>
         </b-card>
       </div>
       <div>
@@ -30,7 +30,7 @@
         >
           <b-card-text>No te ahorques. Pon a prueba tu pericia.</b-card-text>
 
-          <b-button href="/ahorcado" variant="primary">PLAY NOW</b-button>
+          <b-button variant="primary"><router-link to="/ahorcado">PLAY NOW</router-link></b-button>
         </b-card>
       </div>
 
@@ -46,23 +46,34 @@
           bg-variant="dark"
         >
           <b-card-text>Juego para poner a prueba tu memoria</b-card-text>
-
-          <b-button href="/memoria" variant="primary">PLAY NOW</b-button>
+          <b-button variant="primary"><router-link to="/memoria">PLAY NOW</router-link></b-button>
         </b-card>
       </div>
     </div>
 
+ <!--    <ul>
+        <li><router-link to="/juego-palabras">Palabras encadenadas</router-link></li>
+        <li><router-link to="/ahorcado">Ahorcado</router-link></li>
+        <li><router-link to="/memoria">Memoria</router-link></li>
+    </ul> Y poner en el navbar "lista de usuarios"-->
+
+
+
     <div class="h-score">
       <h3 class="text-center">HIGH SCORE</h3>
-      <div style="display:flex" >
-        <ol  class="text-center" style="color:rgb(163, 81, 0); padding: 10px;">
-          NAME: <hr>
-          <li v-for="(item, index) in rankin" :key="index" style="padding: 10px;">
-          {{item.nombre.toUpperCase()}} 
-          </li>
+      <div style="display:flex">
+        <ol class="text-center" style="color:rgb(163, 81, 0); padding: 10px;">
+          NAME:
+          <hr />
+          <li
+            v-for="(item, index) in rankin"
+            :key="index"
+            style="padding: 10px;"
+          >{{item.nombre.toUpperCase()}}</li>
         </ol>
         <ol class="text-center" style="color:rgb(163, 81, 0); padding: 10px;">
-          SCORE: <hr>
+          SCORE:
+          <hr />
           <li v-for="(item, index) in rankin" :key="index" style="padding: 10px;">
             {{item.puntuacion}}
             <span v-if=" puntuacion.puntuacion">POINTS</span>
@@ -89,12 +100,11 @@ export default {
       element2: null,
       turnos: 0,
       fonfoCarta: null
-      
     };
   },
   watch: {
     columns: function() {
-      this.createBoard();     
+      this.createBoard();
     },
     terminado: function(value) {
       this.puntPuntuacion();
@@ -151,7 +161,7 @@ export default {
     terminado() {
       return this.cards.reduce((acc, act) => acc && act.discovered, true);
     },
-    ...mapState(["puntuacion", "usuario","rankin"])
+    ...mapState(["puntuacion", "usuario", "rankin"])
   },
   methods: {
     async createBoard() {
@@ -203,10 +213,10 @@ export default {
     ...mapActions(["puntPuntuacion", "detectarUsuario", "detectarPuntacion"])
   },
   created() {
-    if(!this.puntuacion || this.displayName){
-        this.detectarPuntacion();
-     console.log('ranking',this.rankin);
- /*    if (!this.puntacion) {
+    if (!this.puntuacion || this.displayName) {
+      this.detectarPuntacion();
+      console.log("ranking", this.rankin);
+      /*    if (!this.puntacion) {
       const user = JSON.parse(localStorage.getItem("usuario"));
       const puntua = {
         puntuacion: 0,
@@ -219,11 +229,10 @@ export default {
       store.dispatch("detectarPuntacion", pun);
     } */
 
-    this.detectarUsuario();
-   
+      this.detectarUsuario();
     }
-  this.createBoard();
-  } 
+    this.createBoard();
+  }
 };
 </script>
 
@@ -263,7 +272,6 @@ a {
   margin-left: 21px;
 }
 
-
 .h-score {
   text-align: left;
   position: initial;
@@ -272,12 +280,10 @@ a {
   margin-right: 75%;
   margin-top: -10px;
   font-family: "Press Start 2P", cursive;
-
 }
-.h-score h3{
-    color: rgb(0, 170, 0);
-    padding: 10px;
-    font-family: "Press Start 2P", cursive;
+.h-score h3 {
+  color: rgb(0, 170, 0);
+  padding: 10px;
+  font-family: "Press Start 2P", cursive;
 }
-
 </style>

@@ -174,7 +174,7 @@ export default new Vuex.Store({
       let ref = db.collection('puntMemori').orderBy('puntuacion', 'asc').limit(10)
       ref.onSnapshot(querySnapshot =>{
         this.rankin = []
-
+          console.log(querySnapshot)
           querySnapshot.forEach(doc => {
             this.rankin.push(doc.data())
           })

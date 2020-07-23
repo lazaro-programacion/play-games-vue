@@ -17,7 +17,7 @@
           v-model.lazy="user.nombre"
           :state="nameState"
           aria-describedby="input-live-help input-live-feedback"
-          placeholder=" nombre"
+          placeholder="Nombre"
           trim
         ></b-form-input>
         <b-form-invalid-feedback id="input-live-feedback">El campo no puede estar vacio</b-form-invalid-feedback>
@@ -31,7 +31,7 @@
           v-model="user.email"
           :state="emailState"
           aria-describedby="input-live-help input-live-feedback"
-          placeholder=" email"
+          placeholder="E  mail"
           trim
         ></b-form-input>
         <b-form-invalid-feedback id="input-live-feedback">El campo no puede estar vacio</b-form-invalid-feedback>

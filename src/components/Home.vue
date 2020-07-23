@@ -4,7 +4,7 @@
       <div>
         <b-card
           title="Palabras encadenadas"
-          img-src="https://lh3.googleusercontent.com/wyObs46fr74K4EfEla_4SfJve42Lxm_rzVn5bjY-IGA3H5ux5AfquXqVIXIA-_gnteI"
+          img-src='https://lh3.googleusercontent.com/wyObs46fr74K4EfEla_4SfJve42Lxm_rzVn5bjY-IGA3H5ux5AfquXqVIXIA-_gnteI'
           img-alt="Image"
           img-top
           tag="article"

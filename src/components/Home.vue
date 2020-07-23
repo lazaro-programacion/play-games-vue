@@ -13,7 +13,9 @@
           bg-variant="dark"
         >
           <b-card-text>Palabras encadenadas. Pon a prueba tu cerebro.</b-card-text>
-          <b-button href="/juego-palabras" variant="primary">PLAY NOW</b-button>
+          <b-button variant="primary">
+            <router-link to="/juego-palabras">PLAY NOW</router-link>
+          </b-button>
         </b-card>
       </div>
       <div>
@@ -28,7 +30,9 @@
           bg-variant="dark"
         >
           <b-card-text>No te ahorques. Pon a prueba tu pericia.</b-card-text>
-          <b-button href="/ahorcado" variant="primary">PLAY NOW</b-button>
+          <b-button variant="primary">
+            <router-link to="/ahorcado">PLAY NOW</router-link>
+          </b-button>
         </b-card>
       </div>
       <div>
@@ -43,23 +47,29 @@
           bg-variant="dark"
         >
           <b-card-text>Juego para poner a prueba tu memoria</b-card-text>
-          <b-button href="/memoria" variant="primary">PLAY NOW</b-button>
+          <b-button variant="primary">
+            <router-link to="/memoria">PLAY NOW</router-link>
+          </b-button>
         </b-card>
       </div>
     </div>
     <div class="h-score">
       <h3 class="text-center">HIGH SCORE</h3>
-      <div style="display:flex" >
-        <ol  class="text-center" style="color:rgb(163, 81, 0); padding: 10px;">
+      <div style="display:flex">
+        <ol class="text-center" style="color:rgb(163, 81, 0); padding: 10px;">
           NAME:
-          NAME: <hr>
-          <li v-for="(item, index) in rankin" :key="index" style="padding: 10px;">
-          {{item.nombre.toUpperCase()}} 
-          </li>
+          NAME:
+          <hr />
+          <li
+            v-for="(item, index) in rankin"
+            :key="index"
+            style="padding: 10px;"
+          >{{item.nombre.toUpperCase()}}</li>
         </ol>
         <ol class="text-center" style="color:rgb(163, 81, 0); padding: 10px;">
           SCORE:
-          SCORE: <hr>
+          SCORE:
+          <hr />
           <li v-for="(item, index) in rankin" :key="index" style="padding: 10px;">
             {{item.puntuacion}}
             <span v-if=" puntuacion.puntuacion">POINTS</span>
@@ -83,15 +93,14 @@ export default {
       element1: null,
       element2: null,
       turnos: 0,
-      fonfoCarta: null
-      
+      fonfoCarta: null,
     };
   },
   watch: {
-    columns: function() {
-      this.createBoard();     
+    columns: function () {
+      this.createBoard();
     },
-    terminado: function(value) {
+    terminado: function (value) {
       this.puntPuntuacion();
       if (value) {
         const user = JSON.parse(localStorage.getItem("usuario"));
@@ -100,7 +109,7 @@ export default {
           id: user.id,
           nombre: user.displayName,
           email: user.email,
-          data: new Date()
+          data: new Date(),
         };
         const pun = JSON.parse(localStorage.getItem("puntuacion"));
         if (!pun) {
@@ -127,13 +136,13 @@ export default {
       } else {
         console.log("estas muy fuera");
       }
-    }
+    },
   },
   props: {
     columns: {
       type: Number,
-      default: 4
-    }
+      default: 4,
+    },
   },
   computed: {
     elements() {
@@ -144,7 +153,7 @@ export default {
     terminado() {
       return this.cards.reduce((acc, act) => acc && act.discovered, true);
     },
-    ...mapState(["puntuacion", "usuario","rankin"])
+    ...mapState(["puntuacion", "usuario", "rankin"]),
   },
   methods: {
     async createBoard() {
@@ -156,14 +165,14 @@ export default {
       );
       this.fonfoCarta = respuesta.data[0].urls.thumb;
       this.cards = [];
-      res.data.forEach(i => {
+      res.data.forEach((i) => {
         this.cards.push({
           image: i.urls.thumb,
-          discovered: false
+          discovered: false,
         });
         this.cards.push({
           image: i.urls.thumb,
-          discovered: false
+          discovered: false,
         });
       });
       this.cards = _.shuffle(this.cards);
@@ -191,13 +200,13 @@ export default {
         }
       }
     },
-    ...mapActions(["puntPuntuacion", "detectarUsuario", "detectarPuntacion"])
+    ...mapActions(["puntPuntuacion", "detectarUsuario", "detectarPuntacion"]),
   },
   created() {
-    if(!this.puntuacion || this.displayName){
-        this.detectarPuntacion();
-     console.log('ranking',this.rankin);
- /*    if (!this.puntacion) {
+    if (!this.puntuacion || this.displayName) {
+      this.detectarPuntacion();
+      console.log("ranking", this.rankin);
+      /*    if (!this.puntacion) {
       const user = JSON.parse(localStorage.getItem("usuario"));
       const puntua = {
         puntuacion: 0,
@@ -209,11 +218,10 @@ export default {
       console.log("pun", pun);
       store.dispatch("detectarPuntacion", pun);
     } */
-    this.detectarUsuario();
-   
+      this.detectarUsuario();
     }
-  this.createBoard();
-  } 
+    this.createBoard();
+  },
 };
 </script>
 <!-- Add "scoped" attribute to limit CSS to this component only -->
@@ -259,9 +267,9 @@ a {
   margin-top: -10px;
   font-family: "Press Start 2P", cursive;
 }
-.h-score h3{
-    color: rgb(0, 170, 0);
-    padding: 10px;
-    font-family: "Press Start 2P", cursive;
+.h-score h3 {
+  color: rgb(0, 170, 0);
+  padding: 10px;
+  font-family: "Press Start 2P", cursive;
 }
 </style>

@@ -15,7 +15,8 @@
       <b-collapse id="nav-collapse" is-nav>
         <b-navbar-nav>
           <b-nav-item :to="'/'">Home</b-nav-item>
-          <b-nav-item :to="'/juegos'">Lista de juegos</b-nav-item>
+          <b-nav-item :to="'/juegos'">Lista de juegos</b-nav-item> 
+          <b-nav-item :to="'/usuarios'">Lista de usuarios</b-nav-item>
         </b-navbar-nav>
 
         <div class="fotoo" v-if="usuario">

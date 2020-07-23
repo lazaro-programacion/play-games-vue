@@ -15,7 +15,7 @@ export default new Vuex.Store({
     },
     rankin: [],
     error: null,
-    usuarios:[]
+    usuarios: [],
   },
 
   mutations: {
@@ -33,30 +33,28 @@ export default new Vuex.Store({
     setError(state, payload) {
       state.error = payload;
     },
-    setUsers(state, usuarios){
+    setUsers(state, usuarios) {
       state.usuarios = usuarios;
-    }
+    },
   },
   actions: {
-    getUsers({commit}){
-      db.collection('usuarios').get().then(
-       res=> {
-         const docsUsers=res.docs.map(
-           item=>{
-             const data=item.data();
-             return{
-               id: item.id,
-               displayName: data.displayName,
-               rol: item.rol
-             }
-            }
-         )
-         console.log('Users',docsUsers);
-         commit('setUsers', docsUsers)
-       }
-      )
+    getUsers({ commit }) {
+      db.collection("usuarios")
+        .get()
+        .then((res) => {
+          const docsUsers = res.docs.map((item) => {
+            const data = item.data();
+            return {
+              id: item.id,
+              displayName: data.displayName,
+              rol: item.rol,
+            };
+          });
+          console.log("Users", docsUsers);
+          commit("setUsers", docsUsers);
+        });
     },
-    
+
     crearUsuario({ commit }, usuario) {
       auth
         .createUserWithEmailAndPassword(usuario.email, usuario.pass1)
@@ -165,18 +163,24 @@ export default new Vuex.Store({
           console.log("no entra", error);
         });
     },
-    rankingTop({commit}) {
-      let ref = db.collection('puntMemori').orderBy('puntuacion', 'asc').limit(10)
-      ref.onSnapshot(querySnapshot =>{
-        this.rankin = []
+    rankingTop({ commit }) {
+      let ref = db
+        .collection("puntMemori")
+        .where('puntuacion', '>', 0)
+        .orderBy("puntuacion", "asc")
+        .limit(10);
 
-          querySnapshot.forEach(doc => {
-            this.rankin.push(doc.data())
-          })
-          commit("setRankin", this.rankin),
+        console.log('ref', ref)
 
-        console.log('todo correcto',this.rankin)
-      })
+      ref.onSnapshot((querySnapshot) => {
+        this.rankin = [];
+
+        querySnapshot.forEach((doc) => {
+          this.rankin.push(doc.data());
+        });
+        commit("setRankin", this.rankin),
+          console.log("todo correcto", this.rankin);
+      });
     },
   },
   modules: {},

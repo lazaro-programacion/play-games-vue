@@ -1,20 +1,25 @@
 <template>
-  <div class="contenedor">
+  <div class="contenedor col-12 md-8">
     <div class="p-maxima">
-      <h5>NAME: {{usuario.displayName.toUpperCase()}}</h5>
-      <h5 v-if="puntuacion">
+      <h5 style="padding: 17px;">NAME: {{usuario.displayName.toUpperCase()}}</h5>
+      <h5 v-if="puntuacion" style="padding: 17px;">
         SCORE: {{puntuacion.puntuacion}}
         <span v-if=" puntuacion.puntuacion">POINTS</span>
       </h5>
     </div>
     <div class="h-score">
       <h3 class="text-center">HIGH SCORE</h3>
-      <div style="display:flex" >
-        <ol  class="text-center" style="color:rgb(163, 81, 0); padding: 10px;">
+      <div style="display:flex">
+        <ol
+          class="text-center"
+          style="color:rgb(163, 81, 0); padding: 10px;padding: 10px; margin-left: 70px;"
+        >
           NAME:
-          <li v-for="(item, index) in rankin" :key="index" style="padding: 10px;">
-          {{item.nombre.toUpperCase()}} 
-          </li>
+          <li
+            v-for="(item, index) in rankin"
+            :key="index"
+            style="padding: 10px;"
+          >{{item.nombre.toUpperCase()}}</li>
         </ol>
         <ol class="text-center" style="color:rgb(163, 81, 0);list-style-type:none; padding: 10px;">
           SCORE:
@@ -66,12 +71,11 @@ export default {
       element2: null,
       turnos: 0,
       fonfoCarta: null
-      
     };
   },
   watch: {
     columns: function() {
-      this.createBoard();     
+      this.createBoard();
     },
     terminado: function(value) {
       this.puntPuntuacion();
@@ -128,7 +132,7 @@ export default {
     terminado() {
       return this.cards.reduce((acc, act) => acc && act.discovered, true);
     },
-    ...mapState(["puntuacion", "usuario","rankin"])
+    ...mapState(["puntuacion", "usuario", "rankin"])
   },
   methods: {
     async createBoard() {
@@ -180,27 +184,13 @@ export default {
     ...mapActions(["puntPuntuacion", "detectarUsuario", "detectarPuntacion"])
   },
   created() {
-    if(!this.puntuacion || this.displayName){
-        this.detectarPuntacion();
-     console.log('ranking',this.rankin);
- /*    if (!this.puntacion) {
-      const user = JSON.parse(localStorage.getItem("usuario"));
-      const puntua = {
-        puntuacion: 0,
-        nombre: user.displayName,
-        email: user.email,
-        data: new Date()
-      };
-      const pun = localStorage.setItem("puntuacion", puntua);
-      console.log("pun", pun);
-      store.dispatch("detectarPuntacion", pun);
-    } */
-
-    this.detectarUsuario();
-   
+    if (!this.puntuacion || this.displayName) {
+      this.detectarPuntacion();
+      console.log("ranking", this.rankin);
+      this.detectarUsuario();
     }
-  this.createBoard();
-  } 
+    this.createBoard();
+  }
 };
 </script>
 
@@ -255,8 +245,9 @@ export default {
   background-color: black;
   text-align: left;
   margin-left: 21px;
- 
-
+  border: 7px solid;
+  border-radius: 15px;
+  height: 161px;
 }
 .contenedor {
   font-family: "Press Start 2P", cursive;
@@ -270,42 +261,64 @@ export default {
   text-align: left;
   position: fixed;
   float: right;
-  margin-left: 80%;
   margin-top: -72px;
-
+  border: 7px solid;
+  border-radius: 15px;
+  color: rgb(163, 81, 0);
+  background-color: black;
+  width: 27%;
+  margin-left: 70%;
+  height: 550px;
 }
-.h-score h3{
-    color: rgb(0, 170, 0);
-    padding: 10px;
+.h-score h3 {
+  color: rgb(0, 170, 0);
+  padding: 10px;
 }
 .parpadea {
-  
   animation-name: parpadeo;
   animation-duration: 1s;
   animation-timing-function: linear;
   animation-iteration-count: infinite;
 
-  -webkit-animation-name:parpadeo;
+  -webkit-animation-name: parpadeo;
   -webkit-animation-duration: 1s;
   -webkit-animation-timing-function: linear;
   -webkit-animation-iteration-count: infinite;
 }
 
-@-moz-keyframes parpadeo{  
-  0% { opacity: 1.0; }
-  50% { opacity: 0.0; }
-  100% { opacity: 1.0; }
+@-moz-keyframes parpadeo {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
 }
 
-@-webkit-keyframes parpadeo {  
-  0% { opacity: 1.0; }
-  50% { opacity: 0.0; }
-   100% { opacity: 1.0; }
+@-webkit-keyframes parpadeo {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
 }
 
-@keyframes parpadeo {  
-  0% { opacity: 1.0; }
-   50% { opacity: 0.0; }
-  100% { opacity: 1.0; }
+@keyframes parpadeo {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
 }
 </style>

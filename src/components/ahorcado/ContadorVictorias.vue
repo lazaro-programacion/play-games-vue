@@ -1,8 +1,8 @@
 <template>
-  <div>
+  <div class="vic-der">
     <ul>
-      <li>Victorias: {{victorias}}</li>
-      <li>Derrotas: {{derrotas}}</li>
+      <li style="list-style: none;font-size: 35px;">Victorias: {{victorias}}</li>
+      <li style="list-style: none;">Derrotas: {{derrotas}}</li>
     </ul>
   </div>
 </template>
@@ -27,5 +27,17 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
+.vic-der {
+  position: absolute;
+  margin-top: -18rem;
+  margin-left: -11%;
+  font-size: 38px;
+  text-align: left;
+  font-family: "Press Start 2P", cursive;
+}
+.vic-der li{
+  color: rgb(163, 81, 0);
+
+}
 </style>

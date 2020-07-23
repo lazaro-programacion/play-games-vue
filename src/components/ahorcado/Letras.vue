@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div>
+    <div style="color:rgb(0,170,0)">
       Letras:
       <input type="text" v-model="letras" v-on:keyup="onLetra($event)" />
     </div>

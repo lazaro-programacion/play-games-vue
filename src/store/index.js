@@ -15,7 +15,8 @@ export default new Vuex.Store({
     },
     rankin: [],
     error: null,
-    usuarios:[]
+    usuarios:[],
+    usersPoints:[]
   },
 
   mutations: {
@@ -30,29 +31,35 @@ export default new Vuex.Store({
       state.puntuacion = payload;
       localStorage.setItem("puntuacion", JSON.stringify(state.puntuacion));
     },
-
-
     setError(state, payload) {
       state.error = payload;
     },
-
     setUsers(state, usuarios){
       state.usuarios = usuarios;
+    },
+    setUsersPoints(state, usersPoints){
+      state.usersPoints=usersPoints;
     }
- 
 
+  },
+  getters:{
+    getUsers(state){
+      return state.usuarios;
+    }
   },
   actions: {
     getUsers({commit}){
-      db.collection('usuarios').get().then(
+      db.collection('users').get().then(
        res=> {
          const docsUsers=res.docs.map(
            item=>{
              const data=item.data();
              return{
-               id: item.id,
-               displayName: data.displayName,
-               rol: item.rol
+               email: item.id,
+               name: data.name,
+               about:data.about,
+               rol: data.rol,
+               avatar: data.avatar
              }
             }
          )
@@ -61,7 +68,24 @@ export default new Vuex.Store({
        }
       )
     },
-    
+    getPuntos({commit}){
+      db.collection('puntMemori').get().then(
+        res=>{
+          const docsPuntos=res.docs.map(
+            item=>{
+              const data=item.data();
+              return {
+                puntuacion: data.puntuacion,
+                email: item.id,
+                nombre:data.nombre
+              }
+            }
+          );
+          console.log('puntos', docsPuntos);
+          commit('setUsersPoints',docsPuntos);
+        }
+      )
+    },
     crearUsuario({ commit }, usuario) {
       auth
         .createUserWithEmailAndPassword(usuario.email, usuario.pass1)
@@ -170,18 +194,24 @@ export default new Vuex.Store({
           console.log("no entra", error);
         });
     },
-    rankingTop({commit}) {
-      let ref = db.collection('puntMemori').orderBy('puntuacion', 'asc').limit(10)
-      ref.onSnapshot(querySnapshot =>{
-        this.rankin = []
-          console.log(querySnapshot)
-          querySnapshot.forEach(doc => {
-            this.rankin.push(doc.data())
-          })
-          commit("setRankin", this.rankin),
+    rankingTop({ commit }) {
+      let ref = db
+        .collection("puntMemori")
+        .where('puntuacion', '>', 0)
+        .orderBy("puntuacion", "asc")
+        .limit(10);
 
-        console.log('todo correcto',this.rankin)
-      })
+        console.log('ref', ref)
+
+      ref.onSnapshot((querySnapshot) => {
+        this.rankin = [];
+
+        querySnapshot.forEach((doc) => {
+          this.rankin.push(doc.data());
+        });
+        commit("setRankin", this.rankin),
+          console.log("todo correcto", this.rankin);
+      });
     },
   },
   modules: {},

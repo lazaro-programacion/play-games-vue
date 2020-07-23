@@ -1,6 +1,6 @@
 <template>
-  <div id="app">
-    <img src='../assets/memori.png' alt />
+  <div id="app ">
+    <img class="col-6 md-12" src='../assets/memori.png' alt />
     <div>
       Nivel de Dificultad:
       <select v-model="ncols" >

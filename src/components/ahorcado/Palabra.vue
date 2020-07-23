@@ -1,6 +1,7 @@
 <template>
   <div class="palabra">
     <span
+
       v-for="(item, index) in letras"
       :key="index"
       style="margin-right: 0.5rem;
@@ -21,6 +22,7 @@ export default {
   watch: {
     palabra: function() {
       this.letras = this.palabra.split("").map(l => {
+          console.log('letras', this.palabra)
         return { letra: l.toUpperCase(), visible: false };
       });
     }
@@ -31,6 +33,12 @@ export default {
     }
   },
   created() {
+    
+      this.letras = this.palabra.split("").map(l => {
+        return { letra: l.toUpperCase(), visible: false }; 
+           
+      });
+    
     bus.$on("NuevaLetra", letra => {
       if (this.palabra.toUpperCase().includes(letra)) {
         this.letras = this.letras.map(item => {
@@ -40,12 +48,18 @@ export default {
         });
         if (this.letras.reduce((acc, act) => acc && act.visible, true)) {
           bus.$emit("PalabraCompletada", this.palabra);
+        
         }
       } else {
         bus.$emit("Fallo", letra);
       }
     });
+    console.log('letras', this.letras);
+ 
   }
+ 
+            
+         
 };
 </script>
 

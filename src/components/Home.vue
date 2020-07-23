@@ -13,8 +13,9 @@
           bg-variant="dark"
         >
           <b-card-text>Palabras encadenadas. Pon a prueba tu cerebro.</b-card-text>
-
-          <b-button variant="primary"><router-link to="/juego-palabras">PLAY NOW</router-link></b-button>
+          <b-button variant="primary">
+            <router-link to="/juego-palabras">PLAY NOW</router-link>
+          </b-button>
         </b-card>
       </div>
       <div>
@@ -29,11 +30,11 @@
           bg-variant="dark"
         >
           <b-card-text>No te ahorques. Pon a prueba tu pericia.</b-card-text>
-
-          <b-button variant="primary"><router-link to="/ahorcado">PLAY NOW</router-link></b-button>
+          <b-button variant="primary">
+            <router-link to="/ahorcado">PLAY NOW</router-link>
+          </b-button>
         </b-card>
       </div>
-
       <div>
         <b-card
           title="Memory Game"
@@ -46,23 +47,17 @@
           bg-variant="dark"
         >
           <b-card-text>Juego para poner a prueba tu memoria</b-card-text>
-          <b-button variant="primary"><router-link to="/memoria">PLAY NOW</router-link></b-button>
+          <b-button variant="primary">
+            <router-link to="/memoria">PLAY NOW</router-link>
+          </b-button>
         </b-card>
       </div>
     </div>
-
- <!--    <ul>
-        <li><router-link to="/juego-palabras">Palabras encadenadas</router-link></li>
-        <li><router-link to="/ahorcado">Ahorcado</router-link></li>
-        <li><router-link to="/memoria">Memoria</router-link></li>
-    </ul> Y poner en el navbar "lista de usuarios"-->
-
-
-
     <div class="h-score">
       <h3 class="text-center">HIGH SCORE</h3>
       <div style="display:flex">
         <ol class="text-center" style="color:rgb(163, 81, 0); padding: 10px;">
+          NAME:
           NAME:
           <hr />
           <li
@@ -72,6 +67,7 @@
           >{{item.nombre.toUpperCase()}}</li>
         </ol>
         <ol class="text-center" style="color:rgb(163, 81, 0); padding: 10px;">
+          SCORE:
           SCORE:
           <hr />
           <li v-for="(item, index) in rankin" :key="index" style="padding: 10px;">
@@ -83,7 +79,6 @@
     </div>
   </div>
 </template>
-
 <script>
 import axios from "axios";
 import { UNSPLASH_APPLICATION, UNSPLASH_SECRET } from "../config/unsplash.js";
@@ -91,7 +86,6 @@ import _ from "lodash";
 import { mapState, mapActions } from "vuex";
 import { db } from "../firebase";
 //import store from "../store";
-
 export default {
   data() {
     return {
@@ -99,16 +93,15 @@ export default {
       element1: null,
       element2: null,
       turnos: 0,
-      fonfoCarta: null
+      fonfoCarta: null,
     };
   },
   watch: {
-    columns: function() {
+    columns: function () {
       this.createBoard();
     },
-    terminado: function(value) {
+    terminado: function (value) {
       this.puntPuntuacion();
-
       if (value) {
         const user = JSON.parse(localStorage.getItem("usuario"));
         const publica = {
@@ -116,10 +109,9 @@ export default {
           id: user.id,
           nombre: user.displayName,
           email: user.email,
-          data: new Date()
+          data: new Date(),
         };
         const pun = JSON.parse(localStorage.getItem("puntuacion"));
-
         if (!pun) {
           db.collection("puntMemori")
             .doc(user.email)
@@ -144,13 +136,13 @@ export default {
       } else {
         console.log("estas muy fuera");
       }
-    }
+    },
   },
   props: {
     columns: {
       type: Number,
-      default: 4
-    }
+      default: 4,
+    },
   },
   computed: {
     elements() {
@@ -161,7 +153,7 @@ export default {
     terminado() {
       return this.cards.reduce((acc, act) => acc && act.discovered, true);
     },
-    ...mapState(["puntuacion", "usuario", "rankin"])
+    ...mapState(["puntuacion", "usuario", "rankin"]),
   },
   methods: {
     async createBoard() {
@@ -171,18 +163,16 @@ export default {
       let respuesta = await axios.get(
         `https://api.unsplash.com/photos/random?count=1&query=bikini&client_id=${UNSPLASH_APPLICATION}&client_secret=${UNSPLASH_SECRET}`
       );
-
       this.fonfoCarta = respuesta.data[0].urls.thumb;
-
       this.cards = [];
-      res.data.forEach(i => {
+      res.data.forEach((i) => {
         this.cards.push({
           image: i.urls.thumb,
-          discovered: false
+          discovered: false,
         });
         this.cards.push({
           image: i.urls.thumb,
-          discovered: false
+          discovered: false,
         });
       });
       this.cards = _.shuffle(this.cards);
@@ -210,7 +200,7 @@ export default {
         }
       }
     },
-    ...mapActions(["puntPuntuacion", "detectarUsuario", "detectarPuntacion"])
+    ...mapActions(["puntPuntuacion", "detectarUsuario", "detectarPuntacion"]),
   },
   created() {
     if (!this.puntuacion || this.displayName) {
@@ -228,14 +218,12 @@ export default {
       console.log("pun", pun);
       store.dispatch("detectarPuntacion", pun);
     } */
-
       this.detectarUsuario();
     }
     this.createBoard();
-  }
+  },
 };
 </script>
-
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 .container1 {
@@ -243,11 +231,9 @@ export default {
   grid-template-columns: auto auto auto;
   margin: 5px;
 }
-
 body {
   padding: 1rem;
 }
-
 h3 {
   margin: 40px 0 0;
 }
@@ -262,7 +248,6 @@ li {
 a {
   color: #42b983;
 }
-
 .p-maxima {
   width: 21%;
   position: absolute;
@@ -271,11 +256,12 @@ a {
   text-align: left;
   margin-left: 21px;
 }
-
 .h-score {
   text-align: left;
+  position: fixed;
   position: initial;
   float: right;
+  margin-left: 80%;
   margin-left: 0%;
   margin-right: 75%;
   margin-top: -10px;

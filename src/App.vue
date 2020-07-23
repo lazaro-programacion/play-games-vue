@@ -39,7 +39,7 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #ffffff;
-  background-color: rgb(0, 0, 0);
+  background-image: url('./assets/fondo.webp');
      height: 903px;
 }
 

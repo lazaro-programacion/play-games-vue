@@ -41,7 +41,7 @@ export default {
     bus.$on("NuevaLetra", letra => {
        if (this.palabra.toUpperCase().includes(letra)) {
         this.letras = this.letras.map(item => {
-          return item.letra === letra
+       return item.letra === letra
             ? { letra: item.letra, visible: true }
             : item;
         });

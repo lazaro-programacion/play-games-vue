@@ -37,7 +37,7 @@
 <script>
 import ListaPalabras from "../components/juego-palabras/ListaPalabras";
 import AddPalabra from "../components/juego-palabras/AddPalabra";
-// https://lh3.googleusercontent.com/wyObs46fr74K4EfEla_4SfJve42Lxm_rzVn5bjY-IGA3H5ux5AfquXqVIXIA-_gnteI
+
 export default {
   name: "JuegoPalabras",
   components: {
@@ -58,7 +58,7 @@ export default {
 
 <style scoped>
 .mi-imagen {
-  background-image: url("https://lh3.googleusercontent.com/wyObs46fr74K4EfEla_4SfJve42Lxm_rzVn5bjY-IGA3H5ux5AfquXqVIXIA-_gnteI");
+  background-image: url('https://lh3.googleusercontent.com/wyObs46fr74K4EfEla_4SfJve42Lxm_rzVn5bjY-IGA3H5ux5AfquXqVIXIA-_gnteI');
   height: 251px;
   background-position: center;
   background-repeat: no-repeat;

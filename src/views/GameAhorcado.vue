@@ -90,6 +90,7 @@ export default {
         ); */
     }
   },
+  
   created() {
         if(!this.palabra){
     this.getPalabra();

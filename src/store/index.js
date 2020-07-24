@@ -49,14 +49,14 @@ export default new Vuex.Store({
   },
   actions: {
     getUsers({commit}){
-      db.collection('users').get().then(
+      db.collection('usuarios').get().then(
        res=> {
          const docsUsers=res.docs.map(
            item=>{
              const data=item.data();
              return{
                email: item.id,
-               name: data.name,
+               name: data.displayName,
                about:data.about,
                rol: data.rol,
                avatar: data.avatar
@@ -94,17 +94,19 @@ export default new Vuex.Store({
             displayName: usuario.nombre,
             email: res.user.email,
             uid: res.user.uid,
-            rol: usuario.rol,
+            rol: usuario.rol
+
           };
           const puntua = {
             puntuacion: null,
             nombre: usuario.nombre,
             email: res.user.email,
-            data: new Date(),
+            data: new Date()
           };
 
           db.collection("usuarios")
-            .add(usuarioCreado)
+            .doc(usuarioCreado.email)
+            .set(usuarioCreado)
             .then(console.log("creado correctamente"));
 
           db.collection("usuarios")

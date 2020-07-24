@@ -21,9 +21,9 @@ export default {
   methods: {
     ...mapActions(['rankingTop'])
   },
-  created() {
+   created() {
     this.rankingTop();
-  },
+  }, 
 }
 </script>
 
@@ -40,7 +40,7 @@ export default {
   text-align: center;
   color: #ffffff;
   background-image: url('./assets/fondo.webp');
-     height: 903px;
+     height: 1650px;
 }
 
 #nav {

@@ -12,7 +12,6 @@
 
 <script>
 import bus from "./bus";
-
 export default {
   data() {
     return {
@@ -22,7 +21,6 @@ export default {
   watch: {
     palabra: function() {
       this.letras = this.palabra.split("").map(l => {
-          console.log('letras', this.palabra)
         return { letra: l.toUpperCase(), visible: false };
       });
     }
@@ -32,18 +30,18 @@ export default {
       type: String
     }
   },
+ 
+   beforeDestroy() {
+    bus.$off('NuevaLetra')
+  },
   created() {
     
       this.letras = this.palabra.split("").map(l => {
         return { letra: l.toUpperCase(), visible: false }; 
            
       });
-     console.log(this.palabra)
-     console.log(this.letras)
     bus.$on("NuevaLetra", letra => {
-      console.log(letra , this.letras, this.palabra)
-      /*
-      if (this.palabra.toUpperCase().includes(letra)) {
+       if (this.palabra.toUpperCase().includes(letra)) {
         this.letras = this.letras.map(item => {
        return item.letra === letra
             ? { letra: item.letra, visible: true }
@@ -51,13 +49,12 @@ export default {
         });
         if (this.letras.reduce((acc, act) => acc && act.visible, true)) {
           bus.$emit("PalabraCompletada", this.palabra);
-        
         }
       } else {
         bus.$emit("Fallo", letra);
-      }*/
+      } 
     });
-   
+ 
  
   }
  

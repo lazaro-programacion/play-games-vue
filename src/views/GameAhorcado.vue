@@ -33,6 +33,10 @@
               @click="$bvModal.show('bv-modal-example')"
               variant="primary"
             >ver instrucciones</b-button>
+                <button @click="empezarPartida">
+                Empezar partida
+                </button>
+
           </b-card>
         </b-col>
       </b-row>
@@ -41,8 +45,8 @@
     </div>
       <contadorVictorias />
     <vidas @vidas="vida = $event" />
-    <palabra />
-    <letras />
+    <palabra :palabra='palabra' />
+    <letras :palabra='palabra'/>
   </div>
 </template>
 
@@ -50,9 +54,10 @@
 import Vidas from "../components/ahorcado/Vidas";
 import Letras from "../components/ahorcado/Letras";
 import Palabra from "../components/ahorcado/Palabra";
+import palabras from "../components/ahorcado/array"
 import ContadorVictorias from "../components/ahorcado/ContadorVictorias";
-
-
+import bus from "../components/ahorcado/bus";
+import _ from "lodash";
 
 export default {
   name: "Ahorcado",
@@ -64,12 +69,20 @@ export default {
   },
   data() {
     return {
-     
+      palabra: '',
+      palabrasArray: palabras,
       vida: null
     };
   },
   methods: {
-   
+    getPalabra() {
+      this.palabrasArray = _.shuffle(this.palabrasArray);
+      this.palabra = this.palabrasArray[0]
+        .normalize("NFD")
+        .replace(/[\u0300-\u036f]/g, "");
+            console.log("palabras2,", this.palabra);
+
+      return this.palabra;
       /*  axios
         .get("https://www.aleatorios.com/random-words?dictionary=2&words=1")
         .then(
@@ -80,20 +93,23 @@ export default {
               .replace(/[\u0300-\u036f]/g, "")}
         ); */
     },
-
-  
+     empezarPartida(){
+       
+       this.getPalabra();
+    } 
+  },
+ 
+ 
   created() {
-  
-    
-  //  console.log("palabras");
-  },
-  mounted() {
-  //  console.log('mounted')
-  },
-  destroyed() {
-    console.log('game ahorcado')
-   
-  },
+
+    bus.$on("Ahorcado", () => {
+      this.getPalabra();
+    });
+    bus.$on("PalabraCompletada", () => {
+      this.getPalabra();
+    });
+
+  }
 };
 </script>
 

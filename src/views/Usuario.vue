@@ -2,17 +2,28 @@
   <div class="container">
     <div v-if="!usuario" class="card">...loading</div>
     <div v-else class="card" style="width: 18rem;">
+      <picture v-if="usuario.avatar">
+
       <img
         class="card-img-top"
         v-bind:src="'/assets/'+usuario.avatar"
         v-bind:alt="usuario.avatar"
       />
+      </picture>
+      <picture v-else>
+      <img
+        class="card-img-top"
+        src="/assets/default.png"
+        alt="Default avatar"
+      />
+
+      </picture>
       <div class="card-body">
         <h5 class="card-title">
           {{ usuario.name }} | <span>Rol: {{ usuario.rol }}</span>
         </h5>
         <p class="card-text">
-          {{usuario.about.state}}
+          {{usuario.about?usuario.about.state:''}}
         </p>
         <h5>Mejores puntuaciones</h5>
         <ul class="list-group list-group-flush">
@@ -43,20 +54,12 @@ export default {
     } catch (error) {
       console.error(error);
     }
-
-    // this.usuario=this.$store.state.usuarios.find(
-    //     (user) => user.email === this.$route.params.id
-    //   );
-  },
-  mounted() {
-    //console.log("usuario montado", this.usuario.name);
   },
   computed: {
     usuario() {
-      const usu = this.$store.state.usuarios.find((user) => 
+      return this.$store.state.usuarios.find((user) => 
         user.email === this.$route.params.id
       );
-      return usu;
     },
   },
 };

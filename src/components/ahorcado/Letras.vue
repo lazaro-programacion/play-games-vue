@@ -13,21 +13,22 @@ import bus from "./bus";
 export default {
   data() {
     return {
-      letras: ""
+     letras: ""
     };
   },
   methods: {
     onLetra(event) {
-     // console.log(event);
+     console.log(event.key);
       bus.$emit("NuevaLetra", event.key.toUpperCase());
     }
   },
   created() {
+   // console.log(this.letras)
     bus.$on("Ahorcado", () => {
-      this.letras = "";
+    this.letras = "";
     });
     bus.$on("PalabraCompletada", () => {
-      this.letras = "";
+    this.letras = "";
     });
   }
 };

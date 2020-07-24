@@ -90,8 +90,9 @@ export default {
         ); */
     }
   },
+  
   created() {
-    
+  
     this.getPalabra();
     bus.$on("Ahorcado", () => {
       this.getPalabra();
@@ -99,8 +100,12 @@ export default {
     bus.$on("PalabraCompletada", () => {
       this.getPalabra();
     });
-    console.log("palabras,", this.vida);
-  }
+    console.log("palabras,", this.palabra);
+  },
+  destroyed() {
+    console.log('game ahorcado')
+
+  },
 };
 </script>
 

@@ -38,11 +38,14 @@ export default {
         return { letra: l.toUpperCase(), visible: false }; 
            
       });
-    
+     console.log(this.palabra)
+     console.log(this.letras)
     bus.$on("NuevaLetra", letra => {
+      console.log(letra , this.letras, this.palabra)
+      /*
       if (this.palabra.toUpperCase().includes(letra)) {
         this.letras = this.letras.map(item => {
-          return item.letra === letra
+       return item.letra === letra
             ? { letra: item.letra, visible: true }
             : item;
         });
@@ -52,9 +55,9 @@ export default {
         }
       } else {
         bus.$emit("Fallo", letra);
-      }
+      }*/
     });
-    console.log('letras', this.letras);
+   
  
   }
  

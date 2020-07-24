@@ -101,10 +101,11 @@ export default new Vuex.Store({
             puntuacion: null,
             nombre: usuario.nombre,
             email: res.user.email,
-            data: new Date(),
+            data: new Date()
           };
 
-          db.collection("usuarios").doc(usuario.email)
+          db.collection("usuarios")
+            .doc(usuarioCreado.email)
             .set(usuarioCreado)
             .then(console.log("creado correctamente"));
 

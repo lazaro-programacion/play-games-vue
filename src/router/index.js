@@ -1,12 +1,11 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import {auth} from '../firebase'
-import ruta404  from '../views/ruta404.vue'
+import { auth } from '../firebase'
+import ruta404 from '../views/ruta404.vue'
 
 Vue.use(VueRouter)
 
 const routes = [
-
   {
     path: '/',
     name: 'Home',
@@ -26,7 +25,7 @@ const routes = [
     path: '/juegos',
     name: 'Juegos',
     component: () => import('../views/GameList.vue'),
-    meta: { requiresAuth: true}
+    meta: { requiresAuth: true }
   },
   {
     path: '/juego-palabras',
@@ -53,7 +52,12 @@ const routes = [
     name: 'Usuario',
     component: () => import('../views/Usuario.vue')
   },
-  {path: '*', name:'ruta404', component: ruta404}
+  {
+    path: '/avatar-upload',
+    name: 'AvatarUpload',
+    component: () => import('../components/AvatarUpload.vue')
+  },
+  { path: '*', name: 'ruta404', component: ruta404 }
 
 ]
 
@@ -66,16 +70,16 @@ const router = new VueRouter({
 router.beforeEach((to, from, next) => {
 
   if (to.matched.some(record => record.meta.requiresAuth)) {
-    
+
     const usuario = auth.currentUser
     console.log('usuario desde router ', usuario)
 
     if (!usuario) {
-      next({ path: '/login'})
-    }else{
+      next({ path: '/login' })
+    } else {
       next()
     }
-  }else {
+  } else {
     next()
   }
 })

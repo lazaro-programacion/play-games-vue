@@ -33,6 +33,10 @@
               @click="$bvModal.show('bv-modal-example')"
               variant="primary"
             >ver instrucciones</b-button>
+                <button @click="empezarPartida">
+                Empezar partida
+                </button>
+
           </b-card>
         </b-col>
       </b-row>
@@ -76,7 +80,7 @@ export default {
       this.palabra = this.palabrasArray[0]
         .normalize("NFD")
         .replace(/[\u0300-\u036f]/g, "");
-            console.log("palabras,", this.palabra);
+            console.log("palabras2,", this.palabra);
 
       return this.palabra;
       /*  axios
@@ -88,20 +92,23 @@ export default {
               .normalize("NFD")
               .replace(/[\u0300-\u036f]/g, "")}
         ); */
-    }
+    },
+     empezarPartida(){
+       
+       this.getPalabra();
+    } 
   },
-  
+ 
+ 
   created() {
-        if(!this.palabra){
-    this.getPalabra();
-    }
+
     bus.$on("Ahorcado", () => {
       this.getPalabra();
     });
     bus.$on("PalabraCompletada", () => {
       this.getPalabra();
     });
-    console.log("palabras,", this.palabra);
+
   }
 };
 </script>

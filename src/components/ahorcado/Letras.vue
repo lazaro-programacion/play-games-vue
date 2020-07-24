@@ -18,7 +18,6 @@ export default {
   },
   methods: {
     onLetra(event) {
-     console.log(event.key);
       bus.$emit("NuevaLetra", event.key.toUpperCase());
     }
   },
@@ -26,9 +25,11 @@ export default {
    // console.log(this.letras)
     bus.$on("Ahorcado", () => {
     this.letras = "";
+
     });
     bus.$on("PalabraCompletada", () => {
     this.letras = "";
+
     });
   },
   

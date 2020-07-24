@@ -22,7 +22,6 @@ export default {
   watch: {
     palabra: function() {
       this.letras = this.palabra.split("").map(l => {
-          console.log('letras', this.palabra)
         return { letra: l.toUpperCase(), visible: false };
       });
     }
@@ -31,6 +30,10 @@ export default {
     palabra: {
       type: String
     }
+  },
+ 
+   beforeDestroy() {
+    bus.$off('NuevaLetra')
   },
   created() {
     
@@ -47,12 +50,10 @@ export default {
         });
         if (this.letras.reduce((acc, act) => acc && act.visible, true)) {
           bus.$emit("PalabraCompletada", this.palabra);
-        
         }
       } else {
         bus.$emit("Fallo", letra);
       } 
-         console.log('letras',letra, this.palabra);
     });
  
  

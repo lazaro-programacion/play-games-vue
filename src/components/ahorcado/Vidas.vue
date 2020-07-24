@@ -25,7 +25,7 @@ export default {
   },
 
   created() {
-    console.log(this.vidas)
+      bus.$off('NuevaLetra')
     bus.$on("Fallo", () => {
       this.vidas--;
       if (this.vidas === 0) {
@@ -39,7 +39,6 @@ export default {
     bus.$on("PalabraCompletada", () => {
       this.vidas = 5;
     });
-     console.log(this.vidas)
   },
   mounted() {
     this.$emit("vidas", this.vidas);

@@ -45,7 +45,7 @@
           bg-variant="dark"
         >
           <b-card-text>Juego para poner a prueba tu memoria</b-card-text>
-          <b-button href="/memoria" variant="primary">PLAY NOW</b-button>
+          <b-button to="/memoria" variant="primary">PLAY NOW</b-button>
           <hr style="background-color: white;">
           <div class="h-score">
       <h3 class="text-center">HIGH SCORE</h3>

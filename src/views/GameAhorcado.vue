@@ -11,7 +11,7 @@
       </div>
       <b-button class="mt-3" block @click="$bvModal.hide('bv-modal-example')">Voler</b-button>
     </b-modal>
-    <div class="img-instrucciones" style="display:flex; width: 120%;">
+    <div  v-if="visto && !perdido" class="img-instrucciones" style="display:flex;  flex-wrap: wrap; width: 120%;">
       <img v-if="vida === 5" src="../assets/ahoracado1.webp" alt />
       <img v-if="vida === 4" src="../assets/ahorcado2.webp" alt />
       <img v-if="vida === 3" src="../assets/ahorcado3.webp" alt />
@@ -41,12 +41,15 @@
         </b-col>
       </b-row>
 
-
+  
+    
     </div>
       <contadorVictorias />
-    <vidas @vidas="vida = $event" />
-    <palabra :palabra="palabra" />
-    <letras />
+  <vidas v-if="visto && !perdido"  @vidas="vida = $event" />
+    <palabra v-if="visto && !perdido" :palabra="palabra" />
+    <letras v-if="visto && !perdido" :palabra="palabra" />
+    <img  v-if="!visto" src="https://i.pinimg.com/originals/9a/f1/4e/9af14e0ae92487516894faa9ea2c35dd.gif" alt="imagen-win">
+    <img v-if="perdido" src="https://media1.tenor.com/images/b9d3d8e8d39450995da1955b14b8f210/tenor.gif?itemid=12159885" alt="asd">
   </div>
 </template>
 
@@ -71,7 +74,9 @@ export default {
     return {
       palabra: "",
       palabrasArray: palabras,
-      vida: null
+      vida: null,
+      visto: true,
+      perdido: false
     };
   },
   methods: {
@@ -103,10 +108,20 @@ export default {
   created() {
 
     bus.$on("Ahorcado", () => {
-      this.getPalabra();
+      this.perdido = true
+      setTimeout(() => { this.getPalabra(); 
+       this.perdido = false
+      }, 2500);
     });
+   
     bus.$on("PalabraCompletada", () => {
-      this.getPalabra();
+         this.visto = false
+      setTimeout(() => { this.getPalabra(); 
+       this.visto = true
+      }, 2500);
+         
+      
+     
     });
 
   }

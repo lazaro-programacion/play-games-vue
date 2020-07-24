@@ -2,7 +2,7 @@
   <div>
     <div style="color:rgb(0,170,0)">
       Letras:
-      <input type="text" v-model="letras" v-on:keyup="onLetra($event)" />
+      <input v-if="palabra"  type="text" v-model="letras" v-on:keyup="onLetra($event)" autofocus />
     </div>
   </div>
 </template>
@@ -14,7 +14,12 @@ export default {
   data() {
     return {
      letras: ""
-    };
+    }
+  },
+   props: {
+    palabra: {
+      type: String
+    }
   },
   methods: {
     onLetra(event) {

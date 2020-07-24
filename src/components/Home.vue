@@ -4,7 +4,7 @@
       <div>
         <b-card
           title="Palabras encadenadas"
-          img-src='https://lh3.googleusercontent.com/wyObs46fr74K4EfEla_4SfJve42Lxm_rzVn5bjY-IGA3H5ux5AfquXqVIXIA-_gnteI'
+          img-src="https://i.ibb.co/qgLjfDj/palabrasencadenadas.png"
           img-alt="Image"
           img-top
           tag="article"
@@ -13,9 +13,9 @@
           bg-variant="dark"
         >
           <b-card-text>Palabras encadenadas. Pon a prueba tu cerebro.</b-card-text>
-          <b-button variant="primary">
-            <router-link to="/juego-palabras">PLAY NOW</router-link>
-          </b-button>
+          
+            <router-link to="/juego-palabras"><b-button variant="primary">PLAY NOW</b-button></router-link>
+          
         </b-card>
       </div>
       <div>
@@ -90,7 +90,7 @@ export default {
 .container1 {
   display: grid;
   grid-template-columns: auto auto auto;
-  margin: 5px;
+  margin: 100px;
 }
 body {
   padding: 1rem;
@@ -112,7 +112,7 @@ a {
   color: rgb(163, 81, 0);
   background-color: black;
   text-align: left;
-  margin-left: 21px;
+  margin-left: 100px;
 }
 .h-score {
   text-align: left;

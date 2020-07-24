@@ -29,7 +29,8 @@ export default {
     bus.$on("PalabraCompletada", () => {
       this.letras = "";
     });
-  }
+  },
+  
 };
 </script>
 

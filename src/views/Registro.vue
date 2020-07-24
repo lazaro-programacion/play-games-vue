@@ -31,7 +31,7 @@
           v-model="user.email"
           :state="emailState"
           aria-describedby="input-live-help input-live-feedback"
-          placeholder="E  mail"
+          placeholder="Email"
           trim
         ></b-form-input>
         <b-form-invalid-feedback id="input-live-feedback">El campo no puede estar vacio</b-form-invalid-feedback>

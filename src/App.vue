@@ -21,9 +21,9 @@ export default {
   methods: {
     ...mapActions(['rankingTop'])
   },
-  created() {
+   created() {
     this.rankingTop();
-  },
+  }, 
 }
 </script>
 

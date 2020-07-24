@@ -9,7 +9,7 @@
       <div class="d-block text-center">
         <h3>Trata de adivinar la palabra al preguntar las letras que contiene. Sin embargo, cada respuesta incorrecta te acerca un poco más a perder.</h3>
       </div>
-      <b-button class="mt-3" block @click="$bvModal.hide('bv-modal-example')">Voler</b-button>
+      <b-button class="mt-3" block @click="$bvModal.hide('bv-modal-example')">Volver</b-button>
     </b-modal>
     <div class="img-instrucciones" style="display:flex; width: 120%;">
       <img v-if="vida === 5" src="../assets/ahoracado1.webp" alt />
@@ -41,7 +41,7 @@
     </div>
       <contadorVictorias />
     <vidas @vidas="vida = $event" />
-    <palabra :palabra="palabra" />
+    <palabra />
     <letras />
   </div>
 </template>
@@ -51,9 +51,8 @@ import Vidas from "../components/ahorcado/Vidas";
 import Letras from "../components/ahorcado/Letras";
 import Palabra from "../components/ahorcado/Palabra";
 import ContadorVictorias from "../components/ahorcado/ContadorVictorias";
-import bus from "../components/ahorcado/bus";
-import palabras from "../components/ahorcado/array";
-import _ from "lodash";
+
+
 
 export default {
   name: "Ahorcado",
@@ -65,20 +64,12 @@ export default {
   },
   data() {
     return {
-      palabra: "",
-      palabrasArray: palabras,
+     
       vida: null
     };
   },
   methods: {
-    getPalabra() {
-      this.palabrasArray = _.shuffle(this.palabrasArray);
-      this.palabra = this.palabrasArray[0]
-        .normalize("NFD")
-        .replace(/[\u0300-\u036f]/g, "");
-            console.log("palabras,", this.vida);
-
-      return this.palabra;
+   
       /*  axios
         .get("https://www.aleatorios.com/random-words?dictionary=2&words=1")
         .then(
@@ -88,23 +79,20 @@ export default {
               .normalize("NFD")
               .replace(/[\u0300-\u036f]/g, "")}
         ); */
-    }
-  },
+    },
+
   
   created() {
   
-    this.getPalabra();
-    bus.$on("Ahorcado", () => {
-      this.getPalabra();
-    });
-    bus.$on("PalabraCompletada", () => {
-      this.getPalabra();
-    });
-    console.log("palabras,", this.palabra);
+    
+  //  console.log("palabras");
+  },
+  mounted() {
+  //  console.log('mounted')
   },
   destroyed() {
     console.log('game ahorcado')
-
+   
   },
 };
 </script>

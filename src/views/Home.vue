@@ -30,9 +30,11 @@
           bg-variant="dark"
         >
           <b-card-text>No te ahorques. Pon a prueba tu pericia.</b-card-text>
+         <router-link to="/ahorcado">
           <b-button variant="primary">
-            <router-link to="/ahorcado">PLAY NOW</router-link>
+            PLAY NOW
           </b-button>
+          </router-link>
         </b-card>
       </div>
       <div>

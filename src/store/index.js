@@ -103,8 +103,8 @@ export default new Vuex.Store({
             data: new Date(),
           };
 
-          db.collection("usuarios")
-            .add(usuarioCreado)
+          db.collection("usuarios").doc(usuario.email)
+            .set(usuarioCreado)
             .then(console.log("creado correctamente"));
 
           db.collection("usuarios")

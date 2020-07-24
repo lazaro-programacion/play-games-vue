@@ -4,7 +4,7 @@
       <div>
         <b-card
           title="Palabras encadenadas"
-          img-src="https://lh3.googleusercontent.com/wyObs46fr74K4EfEla_4SfJve42Lxm_rzVn5bjY-IGA3H5ux5AfquXqVIXIA-_gnteI"
+          img-src="https://i.ibb.co/qgLjfDj/palabrasencadenadas.png"
           img-alt="Image"
           img-top
           tag="article"
@@ -13,9 +13,9 @@
           bg-variant="dark"
         >
           <b-card-text>Palabras encadenadas. Pon a prueba tu cerebro.</b-card-text>
-          <b-button variant="primary">
-            <router-link to="/juego-palabras">PLAY NOW</router-link>
-          </b-button>
+          
+            <router-link to="/juego-palabras"><b-button variant="primary">PLAY NOW</b-button></router-link>
+          
         </b-card>
       </div>
       <div>
@@ -30,9 +30,9 @@
           bg-variant="dark"
         >
           <b-card-text>No te ahorques. Pon a prueba tu pericia.</b-card-text>
-          <b-button variant="primary">
-            <router-link to="/ahorcado">PLAY NOW</router-link>
-          </b-button>
+          
+            <router-link to="/ahorcado"><b-button variant="primary">PLAY NOW</b-button></router-link>
+          
         </b-card>
       </div>
       <div>
@@ -47,27 +47,25 @@
           bg-variant="dark"
         >
           <b-card-text>Juego para poner a prueba tu memoria</b-card-text>
-          <b-button variant="primary">
-            <router-link to="/memoria">PLAY NOW</router-link>
-          </b-button>
+          
+            <router-link to="/memoria"><b-button variant="primary">PLAY NOW</b-button></router-link>
+          
         </b-card>
       </div>
     </div>
     <div class="h-score">
       <h3 class="text-center">HIGH SCORE</h3>
       <div style="display:flex">
-        <ol class="text-center" style="color:rgb(163, 81, 0); padding: 10px;">
-          NAME:
+        <ol class="text-center" style="color:black; padding: 10px;">
           NAME:
           <hr />
           <li
             v-for="(item, index) in rankin"
             :key="index"
-            style="padding: 10px;"
+            style="padding: 10px; margin: 13px;"
           >{{item.nombre.toUpperCase()}}</li>
         </ol>
-        <ol class="text-center" style="color:rgb(163, 81, 0); padding: 10px;">
-          SCORE:
+        <ol class="text-center" style="color:black; padding: 10px;">
           SCORE:
           <hr />
           <li v-for="(item, index) in rankin" :key="index" style="padding: 10px;">
@@ -229,7 +227,7 @@ export default {
 .container1 {
   display: grid;
   grid-template-columns: auto auto auto;
-  margin: 5px;
+  margin: 100px;
 }
 body {
   padding: 1rem;
@@ -254,21 +252,20 @@ a {
   color: rgb(163, 81, 0);
   background-color: black;
   text-align: left;
-  margin-left: 21px;
+  margin-left: 100px;
 }
 .h-score {
   text-align: left;
   position: fixed;
   position: initial;
   float: right;
-  margin-left: 80%;
-  margin-left: 0%;
-  margin-right: 75%;
+  margin-left: 50%;
+  margin-right: 50%;
   margin-top: -10px;
   font-family: "Press Start 2P", cursive;
 }
 .h-score h3 {
-  color: rgb(0, 170, 0);
+  color: rgb(49, 4, 4);
   padding: 10px;
   font-family: "Press Start 2P", cursive;
 }

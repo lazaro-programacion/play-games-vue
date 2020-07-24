@@ -9,14 +9,12 @@
 
 <script>
 import bus from "./bus";
-
 export default {
   data() {
     return {
      letras: ""
     }
   },
-  
    props: {
     palabra: {
       type: String
@@ -31,11 +29,9 @@ export default {
    // console.log(this.letras)
     bus.$on("Ahorcado", () => {
     this.letras = "";
-
     });
     bus.$on("PalabraCompletada", () => {
     this.letras = "";
-
     });
   },
   

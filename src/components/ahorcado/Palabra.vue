@@ -1,6 +1,5 @@
 <template>
   <div class="palabra">
-  
     <span
 
       v-for="(item, index) in letras"
@@ -13,17 +12,12 @@
 
 <script>
 import bus from "./bus";
-
-
-
 export default {
   data() {
     return {
       letras: []
-    
     };
   },
-  
   watch: {
     palabra: function() {
       this.letras = this.palabra.split("").map(l => {
@@ -41,8 +35,11 @@ export default {
     bus.$off('NuevaLetra')
   },
   created() {
-    console.log(this.palabra)
     
+      this.letras = this.palabra.split("").map(l => {
+        return { letra: l.toUpperCase(), visible: false }; 
+           
+      });
     bus.$on("NuevaLetra", letra => {
        if (this.palabra.toUpperCase().includes(letra)) {
         this.letras = this.letras.map(item => {
@@ -59,11 +56,9 @@ export default {
     });
  
  
-  },
+  }
  
- methods: {
-  
- }           
+            
          
 };
 </script>

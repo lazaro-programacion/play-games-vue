@@ -41,14 +41,14 @@ export default {
 
 <style>
 .der{
-      -webkit-animation: der 3s ease-in-out 0s 1 normal;
+      animation: der 3s ease-in-out 0s 1 normal;
 }
 @keyframes der {
   0% {left: 0;}
   100% {left: 80%;}
 }
 .izq{
-      -webkit-animation: izq 3s ease-in-out 0s 1 reverse;
+      animation: izq 3s ease-in-out 0s 1 reverse;
 }
 @keyframes izq {
   0% {left: 0;}

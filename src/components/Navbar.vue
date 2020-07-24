@@ -30,8 +30,8 @@
             <template v-slot:button-content>
               <em>Login</em>
             </template>
-            <b-dropdown-item href="/login">Iniciar Sesion</b-dropdown-item>
-            <b-dropdown-item href="/registro">Registro</b-dropdown-item>
+            <b-dropdown-item to="/login">Iniciar Sesion</b-dropdown-item>
+            <b-dropdown-item to="/registro">Registro</b-dropdown-item>
           </b-nav-item-dropdown>
 
           <b-button

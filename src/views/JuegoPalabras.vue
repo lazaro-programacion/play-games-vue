@@ -37,7 +37,7 @@
 <script>
 import ListaPalabras from "../components/juego-palabras/ListaPalabras";
 import AddPalabra from "../components/juego-palabras/AddPalabra";
-// https://lh3.googleusercontent.com/wyObs46fr74K4EfEla_4SfJve42Lxm_rzVn5bjY-IGA3H5ux5AfquXqVIXIA-_gnteI
+
 export default {
   name: "JuegoPalabras",
   components: {

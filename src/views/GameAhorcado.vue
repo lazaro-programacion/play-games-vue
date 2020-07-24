@@ -76,7 +76,7 @@ export default {
       this.palabra = this.palabrasArray[0]
         .normalize("NFD")
         .replace(/[\u0300-\u036f]/g, "");
-            console.log("palabras,", this.vida);
+            console.log("palabras,", this.palabra);
 
       return this.palabra;
       /*  axios
@@ -90,16 +90,18 @@ export default {
         ); */
     }
   },
+  
   created() {
-    
+        if(!this.palabra){
     this.getPalabra();
+    }
     bus.$on("Ahorcado", () => {
       this.getPalabra();
     });
     bus.$on("PalabraCompletada", () => {
       this.getPalabra();
     });
-    console.log("palabras,", this.vida);
+    console.log("palabras,", this.palabra);
   }
 };
 </script>

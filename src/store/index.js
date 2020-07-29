@@ -16,7 +16,7 @@ export default new Vuex.Store({
     rankin: [],
     error: null,
     usuarios:[],
-    usersPoints:[]
+    usersPoints:[],
   },
 
   mutations: {

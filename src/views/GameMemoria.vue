@@ -1,6 +1,6 @@
 <template>
   <div id="app ">
-    <img class="col-6 md-12 der" src='../assets/memori.png' alt />
+    <img class="col-6 md-12 izq" src='../assets/memori.png' alt />
     <div>
       Nivel de Dificultad:
       <select v-model="ncols" >
@@ -38,17 +38,17 @@ export default {
 
 <style>
 .der{
-      -webkit-animation: der 3s ease-in-out 0s 1 normal;
+      animation: der 3s ease-in-out 0s 1 normal;
 }
 @keyframes der {
   0% {left: 0;}
   100% {left: 80%;}
 }
 .izq{
-      -webkit-animation: izq 3s ease-in-out 0s 1 reverse;
+      animation: izq 3s ease-in-out 0s 1 normal;
 }
 @keyframes izq {
   0% {left: 0;}
-  100% {left: 80%;}
+  100% {left: -80%;}
 }
 </style>

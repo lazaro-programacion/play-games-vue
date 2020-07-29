@@ -13,9 +13,10 @@
           bg-variant="dark"
         >
           <b-card-text>Palabras encadenadas. Pon a prueba tu cerebro.</b-card-text>
-          
-            <router-link to="/juego-palabras"><b-button variant="primary">PLAY NOW</b-button></router-link>
-          
+
+          <router-link to="/juego-palabras">
+            <b-button variant="primary">PLAY NOW</b-button>
+          </router-link>
         </b-card>
       </div>
       <div>
@@ -46,44 +47,82 @@
         >
           <b-card-text>Juego para poner a prueba tu memoria</b-card-text>
           <b-button to="/memoria" variant="primary">PLAY NOW</b-button>
-          <hr style="background-color: white;">
+          <hr style="background-color: white;" />
           <div class="h-score">
-      <h3 class="text-center">HIGH SCORE</h3>
-      <div style="display:flex" v-if="puntuacion" >
-        <ul  class="text-center" style="color:rgb(163, 81, 0); padding: 10px;">
-          NAME:
-          <hr>
-          <li v-for="(item, index) in rankin" :key="index" style="padding: 10px;">
-          {{item.nombre.toUpperCase()}} 
-          </li>
-        </ul>
-        <ol  class="text-center" style="color:rgb(163, 81, 0); padding: 10px;list-style-type: none">
-          SCORE:
-           <hr>
-          <li v-for="(item, index) in rankin" :key="index" style="padding: 10px;">
-            {{item.puntuacion}}
-            <span >POINTS</span>
-          </li>
-        </ol>
-      </div>
-    </div>
+            <h3 class="text-center">HIGH SCORE</h3>
+            <div style="display:flex" v-if="puntuacion">
+              <ul class="text-center" style="color:rgb(163, 81, 0); padding: 10px;">
+                NAME:
+                <hr />
+                <li
+                  v-for="(item, index) in rankin"
+                  :key="index"
+                  style="padding: 10px;"
+                >{{item.nombre.toUpperCase()}}</li>
+              </ul>
+              <ol
+                class="text-center"
+                style="color:rgb(163, 81, 0); padding: 10px;list-style-type: none"
+              >
+                SCORE:
+                <hr />
+                <li v-for="(item, index) in rankin" :key="index" style="padding: 10px;">
+                  {{item.puntuacion}}
+                  <span>POINTS</span>
+                </li>
+              </ol>
+            </div>
+          </div>
         </b-card>
-        
+        <router-link :to="'/Chat2/'+ id">
+          <b-button @click="id = '1'" :disabled="sala1 && sala1.length >= 2" variant="primary">Sala 1</b-button>
+        </router-link>
+        <router-link :to="'/Chat2/'+ id">
+          <b-button @click="id = '2'" variant="primary">Sala 2</b-button>
+        </router-link>
       </div>
     </div>
-    
   </div>
 </template>
 <script>
-
 import { mapState } from "vuex";
+import { db } from '../firebase';
 //import store from "../store";
 export default {
-  computed: {
-    ...mapState(['puntuacion','rankin'])
+  data() {
+    return {
+     sala1: [],
+     id: '0'
+    };
   },
+  computed: {
+    ...mapState(["puntuacion", "rankin"]),
+  },
+  created(){
+
+    let varia = this.id
+
+    console.log('entradao',varia);
+    if(varia){
+        let ref =   db.collection("sala-1")
+        .doc(varia)
+        .collection("chat")
+
+      ref.onSnapshot((querySnapshot) => {
+      
+
+        querySnapshot.forEach((doc) => {
+          this.sala1.push(doc.data())
+          console.log('aasda',this.sala1);
+        });
+      });
+      
+    
+    console.log('entradao',this.sala1);
+    }
+     
   }
- 
+};
 </script>
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
@@ -125,10 +164,9 @@ a {
   margin-top: -10px;
   font-family: "Press Start 2P", cursive;
 }
-.h-score h3{
-    color: rgb(0, 170, 0);
-    padding: 10px;
-    font-family: "Press Start 2P", cursive;
-  
+.h-score h3 {
+  color: rgb(0, 170, 0);
+  padding: 10px;
+  font-family: "Press Start 2P", cursive;
 }
 </style>

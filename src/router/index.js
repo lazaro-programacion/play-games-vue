@@ -52,6 +52,14 @@ const routes = [
     path: '/usuario/:id',
     name: 'Usuario',
     component: () => import('../views/Usuario.vue')
+  }, {
+    path: '/chat2/:id',
+    name: 'chat2',
+    component: () => import('../views/Chat2.vue')
+  }, {
+    path: '/chat4/',
+    name: 'chat4',
+    component: () => import('../views/Chat4.vue')
   },
   {path: '*', name:'ruta404', component: ruta404}
 

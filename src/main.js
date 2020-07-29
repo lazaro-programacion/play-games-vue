@@ -5,8 +5,6 @@ import store from './store'
 
 import {auth} from './firebase'
 
-
-
 // para que funcione boostrap-vue
 import { BootstrapVue, BootstrapVueIcons } from 'bootstrap-vue'
 import 'bootstrap/dist/css/bootstrap.css'
@@ -17,6 +15,14 @@ Vue.use( require ('vue-moment') )
 Vue.use(BootstrapVueIcons)
 
 Vue.config.productionTip = false
+
+const vueObject =
+ new Vue({
+  router,
+  store,
+  render: (h) => h(App),
+}).$mount("#app");
+
 
 auth.onAuthStateChanged(user => {
   if(user){
@@ -30,11 +36,7 @@ auth.onAuthStateChanged(user => {
     store.dispatch('detectarUsuario',user)
 
   }
-  new Vue({
-    router,
-    store,
-    render: h => h(App)
-  }).$mount('#app')
+  vueObject
 })
 
 

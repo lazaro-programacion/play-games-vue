@@ -20,12 +20,13 @@ export default {
       vidas: 5
     };
   },
+  
   updated() {
     this.$emit("vidas", this.vidas);
   },
 
   created() {
-      bus.$off('NuevaLetra')
+    bus.$off('NuevaLetra')
     bus.$on("Fallo", () => {
       this.vidas--;
       if (this.vidas === 0) {

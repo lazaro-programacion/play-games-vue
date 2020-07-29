@@ -27,7 +27,7 @@ const vueObject =
 auth.onAuthStateChanged(user => {
   if(user){
 
-    user = JSON.parse(localStorage.getItem('usuario' ))
+   // user = JSON.parse(localStorage.getItem('usuario' ))
    console.log('existe usuario',user)
 
     store.dispatch('detectarUsuario', user)

@@ -61,7 +61,6 @@ import ContadorVictorias from "../components/ahorcado/ContadorVictorias";
 import bus from "../components/ahorcado/bus";
 import palabras from "../components/ahorcado/array";
 import _ from "lodash";
-
 export default {
   name: "Ahorcado",
   components: {
@@ -86,7 +85,6 @@ export default {
         .normalize("NFD")
         .replace(/[\u0300-\u036f]/g, "");
             console.log("palabras2,", this.palabra);
-
       return this.palabra;
       /*  axios
         .get("https://www.aleatorios.com/random-words?dictionary=2&words=1")
@@ -106,7 +104,6 @@ export default {
  
  
   created() {
-
     bus.$on("Ahorcado", () => {
       this.perdido = true
       setTimeout(() => { this.getPalabra(); 
@@ -123,7 +120,6 @@ export default {
       
      
     });
-
   }
 };
 </script>
@@ -136,7 +132,6 @@ export default {
   display: flex;
   justify-content: flex-end;
 }
-
 .row {
   display: flex;
   flex-wrap: wrap;

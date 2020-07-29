@@ -26,6 +26,9 @@ export default {
 
     };
   },
+  created() {
+    console.log('created')
+  },
   components: {
     memoryGame
   },
@@ -45,7 +48,11 @@ export default {
   100% {left: 80%;}
 }
 .izq{
+<<<<<<< HEAD
       animation: izq 3s ease-in-out 0s 1 normal;
+=======
+      animation: izq 3s ease-in-out 0s 1 reverse;
+>>>>>>> f13bf9a7ecfddfc04c865dbc04784036373f26e8
 }
 @keyframes izq {
   0% {left: 0;}

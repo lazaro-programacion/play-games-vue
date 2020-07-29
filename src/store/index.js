@@ -3,6 +3,7 @@ import Vuex from "vuex";
 import { auth, db } from "../firebase";
 import router from "../router";
 
+
 Vue.use(Vuex);
 
 export default new Vuex.Store({
@@ -153,6 +154,7 @@ export default new Vuex.Store({
                   usuarioBuscado = doc.data();
                   usuarioBuscado.id = doc.id;
                   commit("setUsuario", usuarioBuscado);
+                 
                   router.push("/");
                 }
               });
@@ -164,13 +166,14 @@ export default new Vuex.Store({
         });
     },
     cerrarSesion() {
-      auth.signOut().then((res) => {
+      auth.signOut().then(() => {
         router.push("/login");
+      
         localStorage.removeItem("usuario");
         localStorage.removeItem("puntuacion"); //limia el localstore usuario
 
         //  localStorage.clear() // esto lo borra todo
-        console.log("cerrarSesion", res);
+       
       });
     },
     detectarUsuario({ commit }, usuario) {

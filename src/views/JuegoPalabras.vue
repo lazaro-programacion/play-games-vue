@@ -52,7 +52,10 @@ export default {
         error: null
       }
     };
-  }
+  },
+  created() {
+       console.log('created')
+  },
 };
 </script>
 

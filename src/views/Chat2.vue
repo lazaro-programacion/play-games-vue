@@ -23,11 +23,11 @@
     <div class="chat">
       <div class="player-1" >
         Player 1
-        <button @click="player1">ply1</button>
+        <button >ply1</button>
       </div>
       <div class="player-2">
         Player 2
-        <button @click="player2">ply2</button>
+        <button >ply2</button>
       </div>
       <div class="mensaje">Escribir mensaje</div>
     </div>
@@ -35,13 +35,12 @@
 </template>
 
 <script>
-import { db } from "../firebase";
 import { mapState } from "vuex";
 export default {
   data () {
     return {
-      yPosP1: 160, 
-      yPosP2: 160,
+      yPosP1:  160, 
+      yPosP2:  160 ,
 
       size: 20,
       xBall: 0,
@@ -55,22 +54,9 @@ export default {
     }
   },
   updated(){
-        this.player1() 
+    this.yPosP1 = (this.yBall + 140)
+    this.yPosP2 = (this.yBall + 140)
 
-   /*     let varia = this.$route.params.id
-        let ref =   db.collection("sala-1")
-        .doc(varia)
-        .collection("chat")
-
-        ref.onSnapshot((querySnapshot) => {
-  
-        querySnapshot.forEach((doc) => {
-         // this.sala1.push(doc.data())
-            this.pl1 = doc.data().yPosP1
-            console.log('que es esto',this.pl1);
-       //   this.pl2 =doc.data().yPosP2
-        });
-      }); */
   },
   created() {
            
@@ -83,40 +69,7 @@ this.startMoving()
     ...mapState(["usuario"]),
   },
   methods: {
-   /*  player1() {
-         const player = {
-      nombre: this.usuario.displayName,
-      avatar: "asdasd",
-      mensaje: "dasdas sadasd asdsad",
-      yPosP1: this.yPosP1,
    
-     
-    }
-    
-     let varia = this.$route.params.id;
-      db.collection("sala-1")
-        .doc(varia)
-        .collection("chat")
-        .doc("player-1")
-        .set(player)
-        .then();
-    }, */
-    player2() {
-         let varia = this.$route.params.id
-         const player = {
-      nombre: this.usuario.displayName,
-      avatar: "asdasd",
-      mensaje: "dasdas sadasd asdsad",
-            yPosP2: this.yPosP2,
-
-    };
-      db.collection("sala-1")
-        .doc(varia)
-        .collection("chat")
-        .doc("player-2")
-        .set(player)
-        .then();
-    },
      keyPressed (e) {
       if ( e.key === 'w' ) {
         this.yPosP1 = this.yPosP1 - 10
@@ -136,14 +89,14 @@ this.startMoving()
     },
       move () {
       if (this.xDir === 'leftToRight') {
-        this.xBall = this.xBall + this.speed
+        this.xBall = this.xBall + 10
       } else {
-        this.xBall = this.xBall - this.speed
+        this.xBall = this.xBall - 10
       }
       if (this.yDir === 'bottomToTop') {
-        this.yBall = this.yBall + this.speed
+        this.yBall = this.yBall + 10
       } else {
-        this.yBall = this.yBall - this.speed
+        this.yBall = this.yBall - 10
       }
       this.checkForWall()
     },
@@ -185,7 +138,7 @@ this.startMoving()
       if (this.yBall > this.messa - this.size) { //abajo
         this.yDir = 'topToBottom'
       }
-       if (this.xBall == 550 ) { //abajo
+       if (this.xBall == 490 ) { //abajo
         this.xDir = 'rightToLeft'
 
       }
@@ -211,22 +164,7 @@ this.startMoving()
  
   },
     mounted () {
-       this.player1() 
-   /*      let varia = this.$route.params.id
-        let ref =   db.collection("sala-1")
-        .doc(varia)
-        .collection("chat")
-
-        ref.onSnapshot((querySnapshot) => {
-  
-        querySnapshot.forEach((doc) => {
-         // this.sala1.push(doc.data())
-          console.log('aasda',doc.data().yPosP1);
-       //   this.pl1 = doc.data().yPosP1
-       //   this.pl2 =doc.data().yPosP2
-        });
-      }); */
-          this.reset()
+   
     this.startMoving()
   },
 };
